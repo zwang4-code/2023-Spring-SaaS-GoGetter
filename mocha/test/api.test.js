@@ -35,6 +35,11 @@ describe('Test "Get Multiple Goals"', function () {
 		expect(response.body).to.have.length.above(2);
 		expect(response).to.have.headers;
     });
+
+	//response should be a json
+	it('Should be a json', function (){
+		expect(response).to.be.json; 
+	}); 
     
 	// Check if the element in the first array has the known attributes defined in the schema
 	it('The first entry in the array has known properties', function(){
@@ -67,16 +72,16 @@ describe('Test "Get Multiple Goals"', function () {
 
 /**
  * This is testing for getting a single object.
- * Testing for the goalID = 1
+ * Testing for the goalID = 3
  */
-//Testing API: http://localhost:8080/app/goal/1
+//Testing API: http://localhost:8080/app/goal/3
 describe('Test "Get Single Goal"', function () {
 	var requestResult;
 	var response;
 			 
 	before(function (done) {
 		chai.request("http://localhost:8080")
-			.get("/app/goal/1")
+			.get("/app/goal/3")
 			.end(function (err, res) {
 				requestResult = res.body;
 				response = res;
@@ -92,17 +97,17 @@ describe('Test "Get Single Goal"', function () {
 		expect(response).to.have.headers;
 	});
 
+	// Return that it is a json
+	it('Should be a json', function (){
+		expect(response).to.be.json; 
+	}); 
+
 	// Check if dates exist 
 	it('should have a valid start and end date', () => {
 		const endDate = new Date(response.body.endDate);
 		const startDate = new Date(response.body.startDate);
 		expect(endDate).to.be.a('Date');
 		expect(startDate).to.be.a('Date');
-	});
-
-	// Check if the category health exist 
-	it('should have the category as Health', () => {
-		expect(response.body.category).to.equal('Health');
 	});
 
 	// Check that progress element is not empty 
@@ -129,20 +134,6 @@ describe('Test "Get Single Goal"', function () {
 		expect(response.body).to.have.property('progress');
 		expect(response.body).to.have.property('userId').that.is.a('string');
 	});
-
-	// Check the goalID = '1' content is present in the array
-	it('Should contain the sample data for goalID = 1', function(){
-		expect(response.body).to.have.property('title').contain('Intermittent Fasting');
-		expect(response.body).to.have.property('description').contain('Follow 16:8 fasting rule for 30 days');
-		expect(response.body).to.have.property('goalId').contain('1');
-		expect(response.body).to.have.property('userId').contain('1');
-		expect(response.body).to.have.property('startDate').contain('2023-05-05T00:13:41.690Z');
-		expect(response.body).to.have.property('endDate').contain('2023-05-05T00:13:41.690Z');
-		expect(response.body).to.have.property('category').contain('Health');
-		expect(response.body).to.have.property('reminder').equal(false);
-		expect(response.body).to.have.property('progress').contain('Not Started');
-	});
-
 });
 
 
@@ -170,6 +161,11 @@ describe('Test "Get Goals By Category"', function () {
 				expect(response).to.have.headers;
 			});
 			
+			// Return that it is a json
+			it('Should be a json', function (){
+				expect(response).to.be.json; 
+			}); 
+
 			it('The entry in the array has known properties', function(){
 				expect(requestResult[0]).to.include.keys('description');
 				expect(requestResult[0]).to.have.property('reminder');

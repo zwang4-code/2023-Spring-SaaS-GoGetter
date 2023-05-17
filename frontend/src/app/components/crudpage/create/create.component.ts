@@ -36,6 +36,7 @@ export class CreateComponent {
     console.log('category: ', this.newGoal.category)
 
     this.newGoal.userId = "1"   // to FIX LATER 
+    this.newGoal.reminder = false
     this.goalService
       .addNewGoal(this.newGoal)
       .subscribe({
@@ -51,7 +52,7 @@ export class CreateComponent {
   }  
 
   getGoals(): void {
-    console.log("get t goa")
+    console.log("get goals")
     this.goalService.getAllGoals().subscribe(goals => (this.goals = goals));
   }
 
