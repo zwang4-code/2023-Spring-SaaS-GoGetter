@@ -1,0 +1,82 @@
+<app-nav></app-nav>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<hr>
+<div>
+<h2 style="color: #8c4ca6">Create Your Goals</h2>
+</div>
+<hr>
+<form (ngSubmit)="onSubmit()" #goalForm="ngForm">
+    <!--Selection box for category-->
+    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">Category</label>
+        <div class="col-5">
+        <select class="form-control" id="category" required [(ngModel)]="newGoal.category" name="category" #category="ngModel">
+            <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+        </select>
+    </div>
+    </div>
+
+    <!--Input box for title-->
+    <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-5">
+        <input type="text" class="form-control" id="title" required [(ngModel)]="newGoal.title" name="title" #title="ngModel" placeholder="Enter title">
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+        </div>  
+        </div>
+    </div>
+
+    <!--Text box for description-->
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-5">
+        <textarea type="text" class="form-control" id="description" [(ngModel)]="newGoal.description" name="description" rows="3" placeholder="Enter description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
+        <div class="col-5">
+        <input type="date" id="date-input" name="date" [(ngModel)]="newGoal.startDate" >
+    </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
+        <div class="col-5">
+        <input type="date" id="date-input" name="date" [(ngModel)]="newGoal.endDate" >
+    </div>
+    </div>
+
+    <div class="col-10 d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary" [disabled]="!goalForm.form.valid">Save</button>
+    </div>
+
+</form>
+
+
+<!-- <label for="goal-name">Hero name: </label>
+<input type="text" [(ngModel)]="goalName" id="goal-name">
+
+<button type="button" [disabled]="!goalName"
+(click)="add(goalName)">Add hero</button> -->
+<!-- <form (ngSubmit)="onSubmit()"> -->
+<!-- <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" [(ngModel)]="category" id="category">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <div *ngIf="!category">Category is required.</div>
+    </div> -->
+<!-- <div class="form-group">
+        <label for="title">Title</label>
+        <textarea class="form-control" [(ngModel)]="createForm.title" id="title" rows="1" placeholder="Enter title"></textarea> -->
+
+
+<!-- [disabled]="!createForm.title || !createForm.category" -->
+<!-- </form> -->
