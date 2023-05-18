@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { GoalService } from 'src/app/service/goal-service.service';
 import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
 import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
+import { CategoryEnum } from 'src/app/share/enum/CategoryEnum';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,9 +16,11 @@ export class CategoryComponent {
   goalsObservable: Observable<IGoalModelAngular[]>;
   goals: IGoalModelAngular[] = [];
   Progress = ProgressEnum;
+  categories: CategoryEnum[];
 
   constructor(private goalService: GoalService,private router: Router, activatedRoute: ActivatedRoute) {
     this.Progress = ProgressEnum;
+    this.categories = Object.values(CategoryEnum);
     // This is for getting all of the goals
     this.goalsObservable = goalService.getAllGoals();
     this.goalsObservable.subscribe((result) => {
