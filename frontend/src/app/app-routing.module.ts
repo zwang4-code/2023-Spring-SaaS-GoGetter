@@ -11,7 +11,7 @@ import { UpdateComponent } from './components/crudpage/update/update.component';
 
 const routes: Routes = [
   // adding the route to home
-  { path: 'welcome', component: WelcomeComponent },
+  { path: '', component: WelcomeComponent },
   { path: 'read', component: ReadComponent },
   { path: 'create', component: CreateComponent },
   { path: 'category', component:CategoryComponent},
