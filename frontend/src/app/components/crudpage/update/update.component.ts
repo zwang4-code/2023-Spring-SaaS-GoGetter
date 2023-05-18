@@ -16,7 +16,6 @@ export class UpdateComponent {
   goal: GoalModel;
 
   constructor(private goalService: GoalService, private route: ActivatedRoute) {
-    // this.newGoal = new GoalModel('', '', '', CategoryEnum.Health)
     this.goal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
     this.progresses = Object.values(ProgressEnum);
@@ -37,7 +36,7 @@ export class UpdateComponent {
 
   onSubmit() {
     this.submitted = true;
-    console.log('\ngoal created')
+    console.log('Updated Goals Info')
     console.log('title: ', this.goal.title)
     console.log('description: ', this.goal.description)
     console.log('category: ', this.goal.category)
@@ -50,7 +49,7 @@ export class UpdateComponent {
           window.history.back(); 
         },
         error: (error) => {
-          console.error('Error adding goal:', error);
+          console.error('Error updating goal:', error);
           // Handle error scenario
         },
       });
