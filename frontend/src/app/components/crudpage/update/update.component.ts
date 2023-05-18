@@ -22,7 +22,8 @@ export class UpdateComponent {
   }
 
   ngOnInit(): void {
-    const goalId = this.route.snapshot.paramMap.get('goalId'); // Retrieve the goalId parameter from the route
+    // Retrieve the goalId parameter from the route
+    const goalId = this.route.snapshot.paramMap.get('goalId'); 
     if (goalId !== null) {
       this.getGoalbyId(goalId.toString());
     }
@@ -49,7 +50,6 @@ export class UpdateComponent {
         },
         error: (error) => {
           console.error('Error updating goal:', error);
-          // Handle error scenario
         },
       });
   }

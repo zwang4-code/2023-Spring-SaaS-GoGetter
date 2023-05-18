@@ -21,16 +21,10 @@ export class TimelineComponent {
     // This is for getting all of the goals
     this.Progress = ProgressEnum;
     this.goalsObservable = goalService.getAllGoals();
-
     this.goalsObservable.subscribe((result) => {
         this.goals = result;
       })
 
-  }
-
-  getGoals(): void {
-    console.log("get all goals");
-    this.goalService.getAllGoals().subscribe(goals => (this.goals = goals));
   }
 
   deleteGoal(goalId: string): void{
@@ -46,10 +40,6 @@ export class TimelineComponent {
   openEditGoal(goal: IGoalModelAngular): void {
     // Navigate to the edit goal component passing the goal ID as a parameter
     this.router.navigate(['/update', goal.goalId]);
-  }
-  
-  ngOnInit() {
-    //this.getDataFromAPI();
   }
 
 }

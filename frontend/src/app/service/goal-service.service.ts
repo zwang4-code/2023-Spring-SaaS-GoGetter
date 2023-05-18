@@ -24,7 +24,7 @@ export class GoalService {
   constructor(
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('HeroesService');
+    this.handleError = httpErrorHandler.createHandleError();
   }
 
   /** GET all goals from the server */

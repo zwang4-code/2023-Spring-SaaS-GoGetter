@@ -27,7 +27,7 @@ export class CategoryComponent {
         this.goals = result;
       })
   }
-
+  
   deleteGoal(goalId: string): void{
     this.goalService.deleteGoal(goalId).subscribe((result) => {
       // Refresh the goals list after successful deletion
@@ -44,10 +44,6 @@ export class CategoryComponent {
 
   hasGoalsInCategories(categories: string[]): boolean {
     return this.goals.some(goal => categories.includes(goal.category));
-  }
-  
-  ngOnInit() {
-    //this.getDataFromAPI();
   }
 
 }
