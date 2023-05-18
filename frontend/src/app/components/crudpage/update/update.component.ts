@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel'
+import { ActivatedRoute } from '@angular/router';
 import { GoalService } from '../../../service/goal-service.service';
-import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
+import { Router } from '@angular/router';
+import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
 
 @Component({
   selector: 'app-update',
@@ -10,41 +12,43 @@ import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent {
-
-  updatedGoal: GoalModel
   categories: CategoryEnum[];
+  progresses: ProgressEnum[];
+  goal: GoalModel;
 
-  // constructor(private goalService: GoalService) {
-  // }
-
-  goals: IGoalModelAngular[] = []
-
-  constructor(private goalService: GoalService) {
+  constructor(private goalService: GoalService, private route: ActivatedRoute, private router: Router) {
     // this.newGoal = new GoalModel('', '', '', CategoryEnum.Health)
-    this.updatedGoal = new GoalModel()
+    this.goal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
+    this.progresses = Object.values(ProgressEnum);
   }
 
   submitted = false;
 
-  getGoalById(): void {
-    console.log("get goals by Id")
-    this.goalService.getAllGoals().subscribe(goals => (this.goals = goals));
+  ngOnInit(): void {
+    const goalId = this.route.snapshot.paramMap.get('goalId'); // Retrieve the goalId parameter from the route
+    if (goalId !== null) {
+      this.getGoalbyId(goalId.toString());
+    }
+  }
+
+  getGoalbyId(goalId: string): void {
+    this.goalService.getGoalById(goalId).subscribe(goal => (this.goal = goal));
   }
 
   onSubmit() {
     this.submitted = true;
     console.log('\ngoal created')
-    console.log('title: ', this.updatedGoal.title)
-    console.log('description: ', this.updatedGoal.description)
-    console.log('category: ', this.updatedGoal.category)
+    console.log('title: ', this.goal.title)
+    console.log('description: ', this.goal.description)
+    console.log('category: ', this.goal.category)
 
-    this.updatedGoal.userId = "1"   // to FIX LATER 
     this.goalService
-      .updateGoal('1', this.updatedGoal)
+      .updateGoal(this.goal.goalId, this.goal)
       .subscribe({
         next: (response: GoalModel) => {
           console.log('HTTP response: ', response);
+          this.router.navigate(['/timeline']);
         },
         error: (error) => {
           console.error('Error adding goal:', error);

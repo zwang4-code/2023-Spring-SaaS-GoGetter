@@ -9,6 +9,7 @@ import { MessagesComponent } from './components/crudpage/messages/messages.compo
 import { CategoryComponent } from './components/category/category.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { UpdateComponent } from './components/crudpage/update/update.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'category', component:CategoryComponent},
   { path: 'timeline', component:TimelineComponent},
   { path: 'summary', component:SummaryComponent},
+  { path: 'update/:goalId', component:UpdateComponent},
 ];
 
 @NgModule({
