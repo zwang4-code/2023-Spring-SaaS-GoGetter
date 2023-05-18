@@ -26,7 +26,7 @@
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let goal of goals">
-                    <p>{{ goal.title }}
+                    <div>{{ goal.title }}
                       <span class="badge badge-pill" [ngClass]="{
                         'badge-info': goal.progress === Progress.NotStarted,
                         'badge-warning': goal.progress === Progress.InProgress,
@@ -46,7 +46,7 @@
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                           </svg>
                     </button>
-                    </p>
+                  </div>
                 </li>
             </ul>
         </div>

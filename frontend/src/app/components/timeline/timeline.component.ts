@@ -29,21 +29,17 @@ export class TimelineComponent {
   }
 
   getGoals(): void {
-    console.log("get goals")
+    console.log("get all goals");
     this.goalService.getAllGoals().subscribe(goals => (this.goals = goals));
   }
 
   deleteGoal(goalId: string): void{
+    console.log("deleting goal:" + goalId);
     this.goalService.deleteGoal(goalId).subscribe(() => {
       // Refresh the goals list after successful deletion
-      this.getGoals();
-    });
-  }
-
-  getGoal(goalId: string): void{
-    this.goalService.getGoalById(goalId).subscribe(() => {
-      // Refresh the goals list after successful deletion
-      this.getGoals();
+      this.goalsObservable.subscribe((result) => {
+        this.goals = result;
+      })
     });
   }
 
@@ -51,7 +47,7 @@ export class TimelineComponent {
     // Navigate to the edit goal component passing the goal ID as a parameter
     this.router.navigate(['/update', goal.goalId]);
   }
-
+  
   ngOnInit() {
     //this.getDataFromAPI();
   }
