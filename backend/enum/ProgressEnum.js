@@ -4,7 +4,7 @@ exports.ProgressEnum = void 0;
 var ProgressEnum;
 (function (ProgressEnum) {
     ProgressEnum["NotStarted"] = "Not Started";
-    ProgressEnum["InProgress"] = "In progress";
+    ProgressEnum["InProgress"] = "In Progress";
     ProgressEnum["Completed"] = "Completed";
 })(ProgressEnum || (ProgressEnum = {}));
 exports.ProgressEnum = ProgressEnum;
