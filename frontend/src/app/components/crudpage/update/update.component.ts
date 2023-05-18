@@ -4,8 +4,6 @@ import { GoalModel } from '../../../share/model/GoalModel'
 import { ActivatedRoute } from '@angular/router';
 import { GoalService } from '../../../service/goal-service.service';
 import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
-import { Moment } from 'moment';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-update',
@@ -23,8 +21,6 @@ export class UpdateComponent {
     this.progresses = Object.values(ProgressEnum);
   }
 
-  submitted = false;
-
   ngOnInit(): void {
     const goalId = this.route.snapshot.paramMap.get('goalId'); // Retrieve the goalId parameter from the route
     if (goalId !== null) {
@@ -38,9 +34,7 @@ export class UpdateComponent {
     });
   }
 
-
   onSubmit() {
-    this.submitted = true;
     console.log('Updated Goals Info')
     console.log('title: ', this.goal.title)
     console.log('description: ', this.goal.description)

@@ -39,14 +39,14 @@
     <div class="form-group row">
         <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
         <div *ngIf="goal" class="col-5">
-        <input type="date" id="startDate" name="startDate" [(ngModel)]="goal.startDate" >
+        <input type="date" id="startDate" name="startDate" [ngModel] ="goal.startDate | date:'yyyy-MM-dd'" (ngModelChange)="goal.startDate = $event"  >
     </div>
     </div>
 
     <div class="form-group row">
         <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
         <div *ngIf="goal" class="col-5">
-        <input type="date" id="endDate" name="endDate"  [(ngModel)]="goal.endDate" >
+        <input type="date" id="endDate" name="endDate" [ngModel] ="goal.endDate| date:'yyyy-MM-dd'" (ngModelChange)="goal.endDate = $event" >
     </div>
     </div>
 
