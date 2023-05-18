@@ -1,6 +1,6 @@
 enum ProgressEnum {
     NotStarted = "Not Started",
-    InProgress = "In progress",
+    InProgress = "In Progress",
     Completed = "Completed"
   }
 
