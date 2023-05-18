@@ -4,6 +4,8 @@ import { GoalModel } from '../../../share/model/GoalModel'
 import { ActivatedRoute } from '@angular/router';
 import { GoalService } from '../../../service/goal-service.service';
 import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-update',
@@ -31,8 +33,11 @@ export class UpdateComponent {
   }
 
   getGoalbyId(goalId: string): void {
-    this.goalService.getGoalById(goalId).subscribe(goal => (this.goal = goal));
+    this.goalService.getGoalById(goalId).subscribe((goal: GoalModel) => {
+      this.goal = goal;
+    });
   }
+
 
   onSubmit() {
     this.submitted = true;
@@ -46,7 +51,7 @@ export class UpdateComponent {
       .subscribe({
         next: (response: GoalModel) => {
           console.log('HTTP response: ', response);
-          window.history.back(); 
+          window.history.back();
         },
         error: (error) => {
           console.error('Error updating goal:', error);

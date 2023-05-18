@@ -1,6 +1,9 @@
 <app-nav></app-nav>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include the jQuery UI library -->
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
 <hr>
 <div>
 <h2 style="color: #8c4ca6">Edit Your Goal</h2>
@@ -43,7 +46,7 @@
     <div class="form-group row">
         <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
         <div *ngIf="goal" class="col-5">
-        <input type="date" id="endDate" name="endDate" [(ngModel)]="goal.endDate" >
+        <input type="date" id="endDate" name="endDate"  [(ngModel)]="goal.endDate" >
     </div>
     </div>
 

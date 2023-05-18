@@ -3,6 +3,7 @@ import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel'
 import { GoalService } from '../../../service/goal-service.service';
 import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-create',
