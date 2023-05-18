@@ -39,6 +39,10 @@ export class CategoryComponent {
     this.router.navigate(['/update', goal.goalId]);
   }
 
+  hasGoalsInCategories(categories: string[]): boolean {
+    return this.goals.some(goal => categories.includes(goal.category));
+  }
+  
   ngOnInit() {
     //this.getDataFromAPI();
   }
