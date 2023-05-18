@@ -3,7 +3,6 @@ import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel'
 import { GoalService } from '../../../service/goal-service.service';
 import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -20,7 +19,7 @@ export class CreateComponent {
 
   goals: IGoalModelAngular[] = []
 
-  constructor(private goalService: GoalService, private router: Router) {
+  constructor(private goalService: GoalService) {
     // this.newGoal = new GoalModel('', '', '', CategoryEnum.Health)
     this.newGoal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
@@ -42,7 +41,7 @@ export class CreateComponent {
       .subscribe({
         next: (response: GoalModel) => {
           console.log('HTTP response: ', response);
-          this.router.navigate(['/timeline']);
+          window.history.back(); 
         },
         error: (error) => {
           console.error('Error adding goal:', error);

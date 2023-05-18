@@ -3,7 +3,6 @@ import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel'
 import { ActivatedRoute } from '@angular/router';
 import { GoalService } from '../../../service/goal-service.service';
-import { Router } from '@angular/router';
 import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
 
 @Component({
@@ -16,7 +15,7 @@ export class UpdateComponent {
   progresses: ProgressEnum[];
   goal: GoalModel;
 
-  constructor(private goalService: GoalService, private route: ActivatedRoute, private router: Router) {
+  constructor(private goalService: GoalService, private route: ActivatedRoute) {
     // this.newGoal = new GoalModel('', '', '', CategoryEnum.Health)
     this.goal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
@@ -48,7 +47,7 @@ export class UpdateComponent {
       .subscribe({
         next: (response: GoalModel) => {
           console.log('HTTP response: ', response);
-          this.router.navigate(['/timeline']);
+          window.history.back(); 
         },
         error: (error) => {
           console.error('Error adding goal:', error);
