@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel'
 import { GoalService } from '../../../service/goal-service.service';
-import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +12,6 @@ export class CreateComponent {
 
   newGoal: GoalModel
   categories: CategoryEnum[];
-  goals: IGoalModelAngular[] = []
 
   constructor(private goalService: GoalService) {
     this.newGoal = new GoalModel()

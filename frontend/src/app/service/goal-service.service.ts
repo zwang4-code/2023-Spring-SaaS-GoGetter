@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IGoalModelAngular } from '../share/model/IGoalModelAngular';
 import { GoalModel } from '../share/model/GoalModel';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'my-auth-token'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +29,7 @@ export class GoalService {
   /** POST: add a new goal to the database */
   addNewGoal(newGoal: GoalModel): Observable<GoalModel> {
     console.log("Adding a new goal using Angular service")
-    return this.http.post<GoalModel>(this.appGoalURL, newGoal, httpOptions)
+    return this.http.post<GoalModel>(this.appGoalURL, newGoal)
   }
 
   /** PUT: update a goal to the database */
