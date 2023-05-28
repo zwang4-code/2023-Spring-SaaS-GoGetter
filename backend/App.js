@@ -15,6 +15,7 @@ const bodyParser = require("body-parser");
 const GoalModel_1 = require("./model/GoalModel");
 const UserModel_1 = require("./model/UserModel");
 const ReminderModel_1 = require("./model/ReminderModel");
+const passport = require("passport");
 // import crypto module from Node.js to create Hash
 const crypto = require('crypto');
 // Creates and configures an ExpressJS web server.
@@ -43,9 +44,24 @@ class App {
             next();
         });
     }
+    validateAuth(req, res, next) {
+        if (req.isAuthenticated()) {
+            console.log("user is authenticated");
+            return next();
+        }
+        console.log("user is not authenticated");
+        res.redirect('/');
+    }
     // Configure API endpoints.
     routes() {
         let router = express.Router();
+        //GOOGLE OAUTH
+        router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
+        router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+            console.log("successfully authenticated user and returned to callback page.");
+            console.log("redirecting to /#/category");
+            res.redirect('/#/category');
+        });
         //--------------------------------------------GOAL CRUD--------------------------------------
         // Create a goal
         // POST: http://localhost:8080/app/goal

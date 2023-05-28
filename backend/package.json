@@ -14,11 +14,13 @@
     "express": "^4.15.2",
     "mongodb": "^3.1.13",
     "mongoose": "^5.7.5",
+    "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20-with-people-api": "^2.0.0",
     "path": "^0.12.7",
     "typescript": "^4.6.3",
     "url": "^0.11.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node AppServer.js",
