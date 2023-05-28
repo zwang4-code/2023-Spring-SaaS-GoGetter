@@ -15,6 +15,9 @@ const bodyParser = require("body-parser");
 const GoalModel_1 = require("./model/GoalModel");
 const UserModel_1 = require("./model/UserModel");
 const ReminderModel_1 = require("./model/ReminderModel");
+const GooglePassport_1 = require("./GooglePassport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 // import crypto module from Node.js to create Hash
 const crypto = require('crypto');
@@ -29,11 +32,16 @@ class App {
         this.Goals = new GoalModel_1.GoalModel();
         this.Users = new UserModel_1.UserModel();
         this.Reminders = new ReminderModel_1.ReminderModel();
+        this.googlePassportObj = new GooglePassport_1.default();
     }
     // Configure Express middleware.
     middleware() {
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
+        this.expressApp.use(session({ secret: 'gogettersecret' }));
+        this.expressApp.use(cookieParser());
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
     }
     // Add Access-Control-Allow Header to HTTP response 
     addAccessControl() {
@@ -75,7 +83,7 @@ class App {
         // GET: http://localhost:8080/app/goal
         // GET: http://localhost:8080/app/goal?category=Health
         // GET: http://localhost:8080/app/goal?progress=In Progress
-        router.get('/app/goal', (req, res) => {
+        router.get('/app/goal', this.validateAuth, (req, res) => {
             if (req.query.hasOwnProperty('category')) {
                 const _category = req.query.category;
                 console.log('Category: ' + _category);
