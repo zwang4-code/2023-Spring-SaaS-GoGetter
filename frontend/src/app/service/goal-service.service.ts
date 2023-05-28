@@ -7,6 +7,7 @@ import { GoalModel } from '../share/model/GoalModel';
 @Injectable({
   providedIn: 'root'
 })
+
 export class GoalService {
   appGoalURL = 'http://localhost:8080/app/goal';  // URL to web api
 

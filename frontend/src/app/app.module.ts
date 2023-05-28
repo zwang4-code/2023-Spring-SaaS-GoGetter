@@ -18,12 +18,12 @@ import { SummaryComponent } from './components/summary/summary.component';
   declarations: [
     AppComponent,
     WelcomeComponent,
-    NavComponent,
-    CreateComponent,
-    ReadComponent,
     CategoryComponent,
     TimelineComponent,
+    NavComponent,
+    CreateComponent,
     UpdateComponent,
+    ReadComponent,
     SummaryComponent,
   ],
   imports: [
