@@ -165,6 +165,7 @@ class App {
             this.Reminders.deleteReminder(res, { reminderId: id });
         });
         this.expressApp.use('/', router);
+        this.expressApp.use('/', express.static(__dirname + '/dist/'));
     }
 }
 exports.App = App;

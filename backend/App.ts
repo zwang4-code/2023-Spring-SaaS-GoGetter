@@ -185,6 +185,7 @@ class App {
     });
 
     this.expressApp.use('/', router);
+    this.expressApp.use('/', express.static(__dirname+'/dist/'));
   }
 }
 
