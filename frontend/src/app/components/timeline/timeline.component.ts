@@ -14,8 +14,9 @@ import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
 export class TimelineComponent {
   goalsObservable: Observable<IGoalModelAngular[]>;
   goals: IGoalModelAngular[] = [];
+  goalsListCopy: IGoalModelAngular[] = [];
   Progress = ProgressEnum;
-  
+  checked = false;
 
   constructor(private goalService: GoalService, private router: Router, activatedRoute: ActivatedRoute) {
     // This is for getting all of the goals
@@ -23,8 +24,37 @@ export class TimelineComponent {
     this.goalsObservable = goalService.getAllGoals();
     this.goalsObservable.subscribe((result) => {
         this.goals = result;
+        this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
       })
 
+  }
+
+  ngOnInit() {
+    this.getCheckboxStatus()
+  }
+
+  handleHideCheckbox() {
+    this.checked = !this.checked
+    this.getCheckboxStatus()
+    this.hideCompletedGoals()
+  }
+
+  getCheckboxStatus() {
+    if (this.checked) {
+      console.log('Checkbox is checked');
+    } else {
+      console.log('Checkbox is not checked');
+    }
+  }
+
+  hideCompletedGoals() {
+    if (this.checked) {
+      console.log("filtering out completed goals")
+      this.goals = this.goals.filter(goal => goal.progress != ProgressEnum.Completed);
+    } else {
+      console.log("showing all goals")
+      this.goals = this.goalsListCopy
+    }
   }
 
   deleteGoal(goalId: string): void{
@@ -41,5 +71,4 @@ export class TimelineComponent {
     // Navigate to the edit goal component passing the goal ID as a parameter
     this.router.navigate(['/update', goal.goalId]);
   }
-
 }

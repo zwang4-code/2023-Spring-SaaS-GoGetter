@@ -15,8 +15,10 @@ import { Router } from '@angular/router';
 export class CategoryComponent {
   goalsObservable: Observable<IGoalModelAngular[]>;
   goals: IGoalModelAngular[] = [];
+  goalsListCopy: IGoalModelAngular[] = [];
   Progress = ProgressEnum;
   categories: CategoryEnum[];
+  checked = false;
 
   constructor(private goalService: GoalService,private router: Router, activatedRoute: ActivatedRoute) {
     this.Progress = ProgressEnum;
@@ -25,9 +27,38 @@ export class CategoryComponent {
     this.goalsObservable = goalService.getAllGoals();
     this.goalsObservable.subscribe((result) => {
         this.goals = result;
+        this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
       })
   }
   
+  ngOnInit() {
+    this.getCheckboxStatus()
+  }
+
+  handleHideCheckbox() {
+    this.checked = !this.checked
+    this.getCheckboxStatus()
+    this.hideCompletedGoals()
+  }
+
+  getCheckboxStatus() {
+    if (this.checked) {
+      console.log('Checkbox is checked');
+    } else {
+      console.log('Checkbox is not checked');
+    }
+  }
+
+  hideCompletedGoals() {
+    if (this.checked) {
+      console.log("filtering out completed goals")
+      this.goals = this.goals.filter(goal => goal.progress != ProgressEnum.Completed);
+    } else {
+      console.log("showing all goals")
+      this.goals = this.goalsListCopy
+    }
+  }
+
   deleteGoal(goalId: string): void{
     this.goalService.deleteGoal(goalId).subscribe((result) => {
       // Refresh the goals list after successful deletion
