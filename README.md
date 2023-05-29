@@ -15,7 +15,7 @@
 
 ### If you have packaged Angular App with NodeJS and want to run both on Port 8080
 ##### Go to frontend folder 
-- ```ng build``` to rebuild Angular App and create updated bundle (only needed if you have made changes to frontend code)
+- ```ng build``` to rebuild Angular App and create updated bundle
 
 ##### Go to backend folder
 - ```Node AppServer.js``` to run backend code 
