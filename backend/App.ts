@@ -65,7 +65,8 @@ class App {
     let router = express.Router();
     //GOOGLE OAUTH
 
-    router.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] } ) );
+    router.get('/auth/google', 
+    passport.authenticate('google', {scope: ['profile']}) );
     
     router.get('/auth/google/callback', 
     passport.authenticate('google', 
