@@ -13,11 +13,6 @@ export class WelcomeComponent {
 
   constructor(private router: Router, private quoteService: QuoteService) {}
 
-  redirectToGoogleAuth(): void {
-    //window.location.href = '/auth/google';
-    this.router.navigate(['/auth/google']);
-  }
-
   ngOnInit() {
     this.getQuote()
   }
@@ -34,5 +29,10 @@ export class WelcomeComponent {
         console.error('Error adding goal:', error);
       },
     });
+  }
+
+  redirectToGoogleAuth(): void {
+    console.log("redirecting to Google login")
+    window.location.href = '/auth/google';
   }
 }
