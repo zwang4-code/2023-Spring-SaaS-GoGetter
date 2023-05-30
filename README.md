@@ -9,8 +9,8 @@
 
 ##### Go to backend folder
 - ```npm i``` as needed
-- ```tsc``` to compile TypeScript code to JavaScript code (only needed if you have made changes to backend code)
-- ```Node AppServer.js``` to run backend code 
+- ```npm build``` (```tsc```) to compile TypeScript code to JavaScript code (only needed if you have made changes to backend code)
+- ```npm start``` (```Node AppServer.js```) to run backend code 
 
 
 ### If you have packaged Angular App with NodeJS and want to run both on Port 8080
@@ -18,7 +18,7 @@
 - ```ng build``` to rebuild Angular App and create updated bundle
 
 ##### Go to backend folder
-- ```Node AppServer.js``` to run backend code 
+- ```npm start``` (```Node AppServer.js```) to run backend code 
 - Go to: http://localhost:8080 to interact with the app 
 
 
