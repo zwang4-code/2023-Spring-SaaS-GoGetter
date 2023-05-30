@@ -9,7 +9,7 @@
 
 ##### Go to backend folder
 - ```npm i``` as needed
-- ```npm build``` (```tsc```) to compile TypeScript code to JavaScript code (only needed if you have made changes to backend code)
+- ```npm run build``` (```tsc```) to compile TypeScript code to JavaScript code (only needed if you have made changes to backend code)
 - ```npm start``` (```Node AppServer.js```) to run backend code 
 
 
@@ -21,7 +21,20 @@
 - ```npm start``` (```Node AppServer.js```) to run backend code 
 - Go to: http://localhost:8080 to interact with the app 
 
+<br>
 
+### Run Mocha Test
+##### Re-load Database Scripts: go to backend/dbScripts folder
+- ```mongosh```
+- ```show dbs```
+- ```use go-getter```
+- ```db.dropDatabase()```
+- ```load(‘Sampledata.js')```
+
+##### Run Mocha test: go to Mocha folder
+- ```npx mocha```
+
+<br>
 
 Authors:
 * Preedhi Garg
