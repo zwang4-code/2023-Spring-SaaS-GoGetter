@@ -26,7 +26,7 @@
 Authors:
 * Preedhi Garg
 * Sharon Leo
-* Tran Bao
+* Bao Tran Do 
 * Zi Wang
 
 * backend - contains all code related to mongoose and API to fetch data from mongodb
