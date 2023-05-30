@@ -16,13 +16,14 @@ export class CategoryComponent {
   goalsObservable: Observable<IGoalModelAngular[]>;
   goals: IGoalModelAngular[] = [];
   goalsListCopy: IGoalModelAngular[] = [];
-  Progress = ProgressEnum;
+  progress = ProgressEnum;
   categories: CategoryEnum[];
   checked = false;
   firstCategoryWithGoal: CategoryEnum | undefined;
+  goalIsCollapsed: boolean[] = [];
 
   constructor(private goalService: GoalService,private router: Router, activatedRoute: ActivatedRoute) {
-    this.Progress = ProgressEnum;
+    this.progress = ProgressEnum;
     this.categories = Object.values(CategoryEnum);
     // This is for getting all of the goals
     this.goalsObservable = goalService.getAllGoals();
@@ -32,7 +33,9 @@ export class CategoryComponent {
     this.goalsObservable.subscribe((result) => {
         this.goals = result;
         this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
+        // call the following only after data has arrived 
         this.firstCategoryWithGoal = this.findFirstCategoryWithGoal()
+        this.goalIsCollapsed = this.goals.map(() => true);
       })
     this.getCheckboxStatus()
   }

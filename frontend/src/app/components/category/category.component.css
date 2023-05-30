@@ -6,3 +6,13 @@ h2 {
   padding-right: 20px;
   padding-left: 20px;
 }
+
+.custom-dropdown-toggle::after {
+  display: none;  /* Hide the default caret */
+}
+
+.custom-dropdown-menu {
+  width: auto !important;  /* Adjust the width to fit the content */
+  min-width: initial !important;
+  max-width: initial !important;
+}
