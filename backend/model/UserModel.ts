@@ -21,8 +21,10 @@ class UserModel {
         this.schema = new Mongoose.Schema(
             {
                 userId: { type: String, required: true },
+                oauthId: {type: String, required: true},
                 name: { type: String, required: true },
                 email: { type: String, required: true },
+                goals: {type: Number},
                 goalList: [
                     {
                         goalId: String  // TODO: is it better to change this to {type:[GoalModel.schema] ?? }
@@ -102,6 +104,18 @@ class UserModel {
         });
     }
 
+    public getTotalGoals(filter: object, callback: (error: any, totalGoals: number) => void) {
+        this.model.findOne(filter, (err: any, itemArray: any) => {
+          if (err) {
+            console.log('Error:', err);
+            callback(err, 0); // Pass the error and default totalGoals value of 0 to the callback
+          } else {
+            console.log('Retrieved user info successfully');
+            callback(null, itemArray.goals); // Pass null for the error and the retrieved goals value to the callback
+          }
+        });
+      }
+      
     public updateUserDetails(response: any, userUpdate: Object, filter: Object) {
         this.model.findOneAndUpdate(filter, userUpdate, { upsert: true, new: true }, (err: any, result: any) => {
             if (err) {

@@ -14,8 +14,10 @@ class UserModel {
     createSchema() {
         this.schema = new Mongoose.Schema({
             userId: { type: String, required: true },
+            oauthId: { type: String, required: true },
             name: { type: String, required: true },
             email: { type: String, required: true },
+            goals: { type: Number },
             goalList: [
                 {
                     goalId: String // TODO: is it better to change this to {type:[GoalModel.schema] ?? }
@@ -87,6 +89,18 @@ class UserModel {
             else {
                 console.log('Retrieved user info successfully');
                 response.json(itemArray);
+            }
+        });
+    }
+    getTotalGoals(filter, callback) {
+        this.model.findOne(filter, (err, itemArray) => {
+            if (err) {
+                console.log('Error:', err);
+                callback(err, 0); // Pass the error and default totalGoals value of 0 to the callback
+            }
+            else {
+                console.log('Retrieved user info successfully');
+                callback(null, itemArray.goals); // Pass null for the error and the retrieved goals value to the callback
             }
         });
     }

@@ -84,7 +84,9 @@ class App {
     // Create a goal
     // POST: http://localhost:8080/app/goal
     router.post('/app/goal', async (req: any, res: any) => {
+      let profile = req.user;
       var newGoalInfo = req.body;
+      newGoalInfo.userId = profile.id;
       newGoalInfo.goalId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
       console.log('Create new goal with goalId:' + newGoalInfo.goalId);
       this.Goals.createNewGoal(res, newGoalInfo);

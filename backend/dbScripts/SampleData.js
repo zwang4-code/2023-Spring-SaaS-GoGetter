@@ -65,8 +65,10 @@ usersCollection = db.getCollection("users")
 usersCollection.remove({})
 usersCollection.insert({
     userId: "1",
+    oauthId: "117027176084175812322",
     name: "Preedhi",
     email: "preedhigarg@gmail.com",
+    goals: 3,
     goalList : [
         {
             goalId: "1"
@@ -84,17 +86,13 @@ usersCollection.insert({
 
 usersCollection.insert({
     userId: "2",
+    oauthId: "",
     name: "Zi",
     email: "zi@gmail.com",
+    goals: 1,
     goalList : [
         {
             goalId: "4"
-        },
-        {
-            goalId: "5"
-        },
-        {
-            goalId: "6"
         }
        ],
     favoriteView: "Category"
