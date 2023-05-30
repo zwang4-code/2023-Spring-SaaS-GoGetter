@@ -5,8 +5,12 @@
   <h2 style="color: #8c4ca6">
     Look at the badges that you accomplished!
   </h2>
-  <body>
+  <span>
     <!--Default badge that the user will recieve when they have an account with us-->
     <img src="../assets/image/welcome.png" alt="Your Image" title="Welcome!"  width="80" height="80" class="rounded-circle">
-  </body>
+  </span>
+  <span *ngIf="numOfGoals >= 1">
+    <!--Badge that the user will recieve when they created 1 goal-->
+    <img src="../assets/image/firstGoalCreated.png" alt="Your Image" title="First goal created!"  width="80" height="80" class="rounded-circle">
+  </span>
 </div>
