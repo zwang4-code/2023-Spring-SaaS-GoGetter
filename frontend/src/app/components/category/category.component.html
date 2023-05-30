@@ -18,12 +18,27 @@
 </div>
 <hr>
 
+<style>
+  .category {
+    text-transform: uppercase;
+    font-family: Cambria;
+    font-size: 20px;
+  }
+
+  .goal-title {
+
+    font-family: Cambria;
+    font-size: 19px;
+  }
+
+</style>
+
 <!--Make for each Category collapsable and expandable-->
 <div ngbAccordion>
   <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal">
-    <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])">
+    <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])" >
       <!--Category name as Accordion Button-->
-      <button ngbAccordionButton style="font-family: Arial" style="font-size:23px">
+      <button ngbAccordionButton class = "category">
         <img src="assets/image/target.jpeg" width="50" height="50" class="rounded" class="rounded-circle flex-shrink-0">
         {{ category }}
       </button>
@@ -34,14 +49,14 @@
         <ng-template>
           <div class="card-body">
             <ul class="list-group" >
-              <ng-container *ngFor="let goal of goals; let i = index" >
+              <ng-container *ngFor="let goal of goals; let i = index"  >
                 <li class="list-group-item" *ngIf="goal.category == category" style="font-size:20px">
                   <div class="d-flex flex-row bd-highlight justify-content-between">
-                    <div class="p-2 bd-highlight">
+                    <div class="p-2 bd-highlight" class = "goal-title">
                       <button type="button" class="btn" (click)="collapse.toggle()"
                         [attr.aria-expanded]="!goalIsCollapsed[i]" aria-controls="collapseExample + i">
                         <!--show rightward caret if goal is collapsed-->
-                        <span *ngIf="goalIsCollapsed[i]">
+                        <span *ngIf="goalIsCollapsed[i]" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(153, 50, 153)"
                             class="bi bi-caret-right" viewBox="0 0 16 16">
                             <path
