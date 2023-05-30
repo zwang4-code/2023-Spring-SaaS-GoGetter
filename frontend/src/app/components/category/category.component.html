@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <app-nav></app-nav>
 <hr>
 <div class="d-flex flex-row justify-content-between">
@@ -18,21 +15,18 @@
 </div>
 <hr>
 
-<div>
-  <div id="accordion" style="padding-right: 20px;padding-left: 20px;">
-    <ng-container *ngFor="let category of categories">
-      <div class="card" *ngIf="hasGoalsInCategories([category])">
-        <div class="card-header" [id]="'heading' + category">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" aria-expanded="true">
-              <img src="assets/image/target.jpeg" width="40" height="40" class="rounded"
-                class="rounded-circle flex-shrink-0" routerLink="/create" alt="...">
-              {{ category }}
-            </button>
-          </h5>
-        </div>
+<div ngbAccordion>
+  <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal">
+    <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])">
+      <button class="btn">
+        <img src="assets/image/target.jpeg" width="40" height="40" class="rounded" class="rounded-circle flex-shrink-0">
+        {{ category }}
+      </button>
+    </div>
 
-        <div [id]="'collapse' + category" class="collapse show" data-parent="#accordion">
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
           <div class="card-body">
             <ul class="list-group">
               <ng-container *ngFor="let goal of goals">
@@ -41,8 +35,7 @@
                     <span class="badge badge-pill" [ngClass]="{
                     'badge-info': goal.progress === Progress.NotStarted,
                     'badge-warning': goal.progress === Progress.InProgress,
-                    'badge-success': goal.progress === Progress.Completed
-                  }">
+                    'badge-success': goal.progress === Progress.Completed}">
                       {{ goal.progress }}
                     </span>
                     <button class="btn btn-outline-danger float-right" (click)="deleteGoal(goal.goalId)">
@@ -68,8 +61,8 @@
               </ng-container>
             </ul>
           </div>
-        </div>
+        </ng-template>
       </div>
-    </ng-container>
+    </div>
   </div>
 </div>

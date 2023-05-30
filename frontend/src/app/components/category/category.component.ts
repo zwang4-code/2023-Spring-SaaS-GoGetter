@@ -19,19 +19,21 @@ export class CategoryComponent {
   Progress = ProgressEnum;
   categories: CategoryEnum[];
   checked = false;
+  firstCategoryWithGoal: CategoryEnum | undefined;
 
   constructor(private goalService: GoalService,private router: Router, activatedRoute: ActivatedRoute) {
     this.Progress = ProgressEnum;
     this.categories = Object.values(CategoryEnum);
     // This is for getting all of the goals
     this.goalsObservable = goalService.getAllGoals();
-    this.goalsObservable.subscribe((result) => {
-        this.goals = result;
-        this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
-      })
   }
   
   ngOnInit() {
+    this.goalsObservable.subscribe((result) => {
+        this.goals = result;
+        this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
+        this.firstCategoryWithGoal = this.findFirstCategoryWithGoal()
+      })
     this.getCheckboxStatus()
   }
 
@@ -45,7 +47,7 @@ export class CategoryComponent {
     if (this.checked) {
       console.log('Checkbox is checked');
     } else {
-      console.log('Checkbox is not checked');
+      console.log('Checkbox is aaa not checked');
     }
   }
 
@@ -55,7 +57,7 @@ export class CategoryComponent {
       this.goals = this.goals.filter(goal => goal.progress != ProgressEnum.Completed);
     } else {
       console.log("showing all goals")
-      this.goals = this.goalsListCopy
+      this.goals = this.goalsListCopy  // show all goals again using hard copy
     }
   }
 
@@ -73,8 +75,13 @@ export class CategoryComponent {
     this.router.navigate(['/update', goal.goalId]);
   }
 
-  hasGoalsInCategories(categories: string[]): boolean {
-    return this.goals.some(goal => categories.includes(goal.category));
+  // this function aims to find the first category with goals (so it's not collapsed when page is rendered)
+  findFirstCategoryWithGoal(): CategoryEnum | undefined {
+    return this.categories.find(category => this.goals.some(goal => goal.category == category));
+  }
+
+  hasGoalsInCategories(currCategory: string[]): boolean {
+    return this.goals.some(goal => currCategory.includes(goal.category));
   }
 
 }
