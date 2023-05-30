@@ -18,8 +18,18 @@
     </ul>
     <span class="navbar-text">
       <img src="../assets/image/pie.png" routerLink="/summary" width="32" height="32" class="rounded-circle">
-      &nbsp; &nbsp;
-      <img src="../assets/image/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
+      &nbsp;&nbsp;
+      <!--profile dropdwon-->
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn custom-dropdown-toggle" ngbDropdownToggle id="userdropdown">
+          <img src="../assets/image/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        </button>
+        <div ngbDropdownMenu aria-labelledby="userdropdown" class="dropdown-menu dropdown-menu-end">
+          <button ngbDropdownItem>Username</button>
+          <button ngbDropdownItem>Email</button>
+          <button ngbDropdownItem>Sign Out</button>
+        </div>
+      </div>
     </span>
   </div>
 </nav>
