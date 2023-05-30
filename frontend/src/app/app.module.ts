@@ -13,6 +13,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { UpdateComponent } from './components/partials/update/update.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SummaryComponent } from './components/summary/summary.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
