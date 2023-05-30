@@ -13,4 +13,12 @@
     <!--Badge that the user will recieve when they created 1 goal-->
     <img src="../assets/image/firstGoalCreated.png" alt="Your Image" title="First goal created!"  width="80" height="80" class="rounded-circle">
   </span>
+  <span *ngIf="numOfGoals >= 5">
+    <!--Badge that the user will recieve when they created 5 goals-->
+    <img src="../assets/image/firstFiveGoalsCreated.png" alt="Your Image" title="Five goals created!"  width="80" height="80" class="rounded-circle">
+  </span>
+  <span *ngIf="numOfGoals >= 10">
+    <!--Badge that the user will recieve when they created 5 goals-->
+    <img src="../assets/image/tenGoalsCreated.png" alt="Your Image" title="Ten goals created!"  width="80" height="80" class="rounded-circle">
+  </span>
 </div>
