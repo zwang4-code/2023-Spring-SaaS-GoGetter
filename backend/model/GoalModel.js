@@ -72,8 +72,8 @@ class GoalModel {
             }
         });
     }
-    retrieveAllGoals(response) {
-        var query = this.model.find({});
+    retrieveAllGoals(response, filter) {
+        var query = this.model.find(filter);
         query.exec((err, itemArray) => {
             if (err) {
                 console.log(err);

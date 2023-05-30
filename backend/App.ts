@@ -96,7 +96,8 @@ class App {
     // GET: http://localhost:8080/app/goal
     // GET: http://localhost:8080/app/goal?category=Health
     // GET: http://localhost:8080/app/goal?progress=In Progress
-    router.get('/app/goal',this.validateAuth, (req, res) => {
+    router.get('/app/goal',this.validateAuth, (req: any, res: any) => {
+      let profile = req.user;
       if (req.query.hasOwnProperty('category')) {
         const _category = req.query.category;
         console.log('Category: ' + _category);
@@ -109,7 +110,7 @@ class App {
       } 
       else {
         console.log('Query all goals');
-        this.Goals.retrieveAllGoals(res);
+        this.Goals.retrieveAllGoals(res, {userId: profile.id});
       }
      
     });
