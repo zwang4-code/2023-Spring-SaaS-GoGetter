@@ -14,6 +14,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { UpdateComponent } from './components/partials/update/update.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BadgesComponent } from './components/badges/badges.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UpdateComponent,
     ReadComponent,
     SummaryComponent,
+    BadgesComponent,
   ],
   imports: [
     BrowserModule,

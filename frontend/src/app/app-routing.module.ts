@@ -6,6 +6,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { UpdateComponent } from './components/partials/update/update.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'create', component: CreateComponent },
   { path: 'update/:goalId', component:UpdateComponent},
   { path: 'summary', component:SummaryComponent},
+  { path: 'badges', component:BadgesComponent},
 ];
 
 @NgModule({
