@@ -23,8 +23,8 @@
   <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal">
     <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])">
       <!--Category name as Accordion Button-->
-      <button ngbAccordionButton>
-        <img src="assets/image/target.jpeg" width="40" height="40" class="rounded" class="rounded-circle flex-shrink-0">
+      <button ngbAccordionButton style="font-family: Arial" style="font-size:23px">
+        <img src="assets/image/target.jpeg" width="50" height="50" class="rounded" class="rounded-circle flex-shrink-0">
         {{ category }}
       </button>
     </div>
@@ -33,9 +33,9 @@
       <div ngbAccordionBody>
         <ng-template>
           <div class="card-body">
-            <ul class="list-group">
-              <ng-container *ngFor="let goal of goals; let i = index">
-                <li class="list-group-item" *ngIf="goal.category == category">
+            <ul class="list-group" >
+              <ng-container *ngFor="let goal of goals; let i = index" >
+                <li class="list-group-item" *ngIf="goal.category == category" style="font-size:20px">
                   <div class="d-flex flex-row bd-highlight justify-content-between">
                     <div class="p-2 bd-highlight">
                       <button type="button" class="btn" (click)="collapse.toggle()"
@@ -108,12 +108,12 @@
 
                   <!--Collapsable goal details-->
                   <div #collapse="ngbCollapse" [(ngbCollapse)]="goalIsCollapsed[i]">
-                    <div class="card">
-                      <div class="card-body">
-                        <div>Description: {{goal.description}}</div>
-                        <div>Start date: {{goal.startDate}}</div>
-                        <div>End date: {{goal.endDate}}</div>
-                        <div>Reminder: {{goal.reminder}}</div>
+                    <div class="card" >
+                      <div class="card-body"  style="font-size:17px">
+                        <div style="font-family: Cambria">Description: {{goal.description}}</div>
+                        <div style="font-family:Cambria">Start date: {{goal.startDate}}</div>
+                        <div style="font-family: Cambria">End date: {{goal.endDate}}</div>
+                        <div style="font-family: Cambria">Reminder: {{goal.reminder}}</div>
                       </div>
                     </div>
                   </div>
