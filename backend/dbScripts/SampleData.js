@@ -68,7 +68,7 @@ usersCollection.insert({
     oauthId: "117027176084175812322",
     name: "Preedhi Garg",
     email: "gargpreedhi@gmail.com",
-    goalCreated: 3
+    goalCreated: 2
 }
 )
 
@@ -77,7 +77,7 @@ usersCollection.insert({
     oauthId: "113188584359730329106",
     name: "Zi Wang",
     email: "zi@gmail.com",
-    goalCreated: 1
+    goalCreated: 2
 })
 
 //REMINDERS COLLECTION
