@@ -27,7 +27,7 @@
         <div ngbDropdownMenu aria-labelledby="userdropdown" class="dropdown-menu dropdown-menu-end">
           <button ngbDropdownItem>{{user.name}}</button>
           <button ngbDropdownItem>{{user.email}}</button>
-          <button ngbDropdownItem>Sign Out</button>
+          <button ngbDropdownItem (click)="signOut()" >Sign Out</button>
         </div>
       </div>
     </span>
