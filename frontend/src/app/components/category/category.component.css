@@ -16,3 +16,27 @@ h2 {
   min-width: initial !important;
   max-width: initial !important;
 }
+
+.category {
+  text-transform: uppercase;
+  font-family: Cambria;
+  font-size: 15px;
+  background-color: #E6E6FA;
+}
+
+.goal-title {
+
+  font-family: Cambria;
+  font-size: 15px;
+}
+
+.card-body{
+  border: none;
+}
+
+.accordion-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}

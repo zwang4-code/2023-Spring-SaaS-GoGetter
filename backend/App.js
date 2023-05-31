@@ -193,7 +193,7 @@ class App {
             this.Reminders.deleteReminder(res, { reminderId: id });
         });
         //--------------------------------------------GOAL MOCHA TEST API--------------------------------------
-        //------To bypass authentication logic, these API routes are created for testing purpose----------
+        //------To bypass authentication logic, duplicate API routes are created for testing purpose----------
         // Test retrieve all goals
         router.get('/test/app/goal', (req, res) => {
             console.log('Query all goals');
@@ -213,7 +213,7 @@ class App {
             console.log('Create new goal with goalId:' + newGoalInfo.goalId);
             this.Goals.createNewGoal(res, newGoalInfo);
         }));
-        // Delete one goal for one user
+        // Test delete one goal for one user
         router.delete('/test/app/goal/:goalId', (req, res) => {
             var id = req.params.goalId;
             console.log('GoalId to be deleted: ' + id);
