@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
 const DataAccess_1 = require("../DataAccess");
-const FavoriteEnum_1 = require("../enum/FavoriteEnum");
 const Mongoose = require("mongoose");
 let mongooseConnection = DataAccess_1.DataAccess.mongooseConnection;
 let mongooseObj = DataAccess_1.DataAccess.mongooseInstance;
@@ -17,17 +16,7 @@ class UserModel {
             oauthId: { type: String, required: true },
             name: { type: String, required: true },
             email: { type: String, required: true },
-            goals: { type: Number },
-            goalList: [
-                {
-                    goalId: String // TODO: is it better to change this to {type:[GoalModel.schema] ?? }
-                }
-            ],
-            favoriteView: {
-                type: String,
-                enum: [FavoriteEnum_1.FavoriteEnum.Category, FavoriteEnum_1.FavoriteEnum.Timeline],
-                default: FavoriteEnum_1.FavoriteEnum.Category
-            },
+            goalCreated: { type: Number },
         }, { collection: 'users', versionKey: false });
     }
     createModel() {
@@ -89,18 +78,6 @@ class UserModel {
             else {
                 console.log('Retrieved user info successfully');
                 response.json(itemArray);
-            }
-        });
-    }
-    getTotalGoals(filter, callback) {
-        this.model.findOne(filter, (err, itemArray) => {
-            if (err) {
-                console.log('Error:', err);
-                callback(err, 0); // Pass the error and default totalGoals value of 0 to the callback
-            }
-            else {
-                console.log('Retrieved user info successfully');
-                callback(null, itemArray.goals); // Pass null for the error and the retrieved goals value to the callback
             }
         });
     }

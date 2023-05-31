@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CategoryEnum } from '../../../share/enum/CategoryEnum'
-import { GoalModel } from '../../../share/model/GoalModel'
+import { GoalModel } from '../../../share/model/GoalModel';
 import { GoalService } from '../../../service/goal-service.service';
+import { UserModel } from '../../../share/model/UserModel';
 
 @Component({
   selector: 'app-create',
@@ -24,14 +25,20 @@ export class CreateComponent {
     console.log('description: ', this.newGoal.description)
     console.log('category: ', this.newGoal.category)
 
-    this.newGoal.userId = "1"   // to FIX LATER 
-    this.newGoal.reminder = false //reminder by default is false
     this.goalService
       .addNewGoal(this.newGoal)
       .subscribe({
         next: (response: GoalModel) => {
           console.log('HTTP response: ', response);
-          window.history.back(); 
+          this.goalService.updateUser().subscribe({
+            next: (userResponse) => {
+              console.log('User updated:', userResponse);
+              window.history.back();
+            },
+            error: (userError) => {
+              console.error('Error updating user:', userError);
+            },
+          });
         },
         error: (error) => {
           console.error('Error adding goal:', error);

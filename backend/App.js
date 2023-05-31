@@ -77,6 +77,7 @@ class App {
             let profile = req.user;
             var newGoalInfo = req.body;
             newGoalInfo.userId = profile.id;
+            newGoalInfo.reminder = false;
             newGoalInfo.goalId = crypto.randomBytes(16).toString("hex"); // generate random ID to assign to new user 
             console.log('Create new goal with goalId:' + newGoalInfo.goalId);
             this.Goals.createNewGoal(res, newGoalInfo);
@@ -135,25 +136,25 @@ class App {
             this.Users.createNewUser(res, newUserInfo, { email: newUserEmail });
         });
         // Retrieve all users
-        // http://localhost:8080/app/user
-        router.get('/app/user/', (req, res) => {
+        // http://localhost:8080/app/users
+        router.get('/app/users', (req, res) => {
             console.log('Query all users');
             this.Users.retrieveAllUsers(res);
         });
         // Retrieve one user by userId
-        // http://localhost:8080/app/user/1
-        router.get('/app/user/:userId', (req, res) => {
-            var id = req.params.userId;
-            console.log('Query user with ID ' + id);
-            this.Users.retrieveUserDetails(res, { userId: id });
+        // http://localhost:8080/app/user
+        router.get('/app/user', (req, res) => {
+            var profile = req.user;
+            console.log('Query user with ID ' + profile.id);
+            this.Users.retrieveUserDetails(res, { oauthId: profile.id });
         });
         // Update one user by userId
         // http://localhost:8000/app/user/2 (user info in JSON in input payload)
-        router.put('/app/user/:userId', (req, res) => {
-            const id = req.params.userId;
+        router.put('/app/user', (req, res) => {
+            const profile = req.user;
             const userUpdate = req.body;
-            console.log('Update info for user with ID ' + id);
-            this.Users.updateUserDetails(res, userUpdate, { userId: id });
+            console.log('Update info for user with ID ' + profile.id);
+            this.Users.updateUserDetails(res, userUpdate, { oauthId: profile.id });
         });
         // Delete one user
         // http://localhost:8000/app/user/2

@@ -66,36 +66,18 @@ usersCollection.remove({})
 usersCollection.insert({
     userId: "1",
     oauthId: "117027176084175812322",
-    name: "Preedhi",
-    email: "preedhigarg@gmail.com",
-    goals: 3,
-    goalList : [
-        {
-            goalId: "1"
-        },
-        {
-            goalId: "2"
-        },
-        {
-            goalId: "3"
-        }
-       ],
-    favoriteView: "Category"
+    name: "Preedhi Garg",
+    email: "gargpreedhi@gmail.com",
+    goalCreated: 3
 }
 )
 
 usersCollection.insert({
     userId: "2",
     oauthId: "113188584359730329106",
-    name: "Zi",
+    name: "Zi Wang",
     email: "zi@gmail.com",
-    goals: 1,
-    goalList : [
-        {
-            goalId: "4"
-        }
-       ],
-    favoriteView: "Category"
+    goalCreated: 1
 })
 
 //REMINDERS COLLECTION

@@ -6,13 +6,7 @@ interface IUserModel extends Mongoose.Document {
     oauthId: string;
     name: string;
     email: string;
-    goals: number;
-    goalList: [
-        {
-            goalId: string
-        }
-    ];
-    favoriteView: FavoriteEnum
+    goalCreated: number;
 }
 export {IUserModel};
 

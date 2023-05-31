@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IGoalModelAngular } from '../share/model/IGoalModelAngular';
+import { IUserModelAngular } from '../share/model/IUserModelAngular';
 import { GoalModel } from '../share/model/GoalModel';
+import { UserModel } from '../share/model/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import { GoalModel } from '../share/model/GoalModel';
 
 export class GoalService {
   appGoalURL = 'http://localhost:8080/app/goal';  // URL to web api
+  userURL = 'http://localhost:8080/app/user';
 
   constructor(private http: HttpClient) {
   }
@@ -45,5 +48,16 @@ export class GoalService {
     console.log(`Deleting goal with ID: ${goalId}`);
     const url = `${this.appGoalURL}/${goalId}`;
     return this.http.delete<void>(url)
+  }
+   
+  //method to update total goals ever created by user
+  updateUser(): Observable<UserModel>{
+    const updateData = { $inc: { goalCreated: 1 } };
+    return this.http.put<GoalModel>(this.userURL, updateData);
+  }
+
+  //method to get user details
+  getUserById(): Observable<IUserModelAngular> {
+    return this.http.get<IUserModelAngular>(this.userURL);
   }
 }
