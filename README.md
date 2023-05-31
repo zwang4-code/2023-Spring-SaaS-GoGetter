@@ -27,7 +27,7 @@
 ##### Re-load Database Scripts: go to backend/dbScripts folder
 - ```mongosh```
 - ```show dbs```
-- ```use go-getter```
+- ```use gogetter```
 - ```db.dropDatabase()```
 - ```load(‘Sampledata.js')```
 
