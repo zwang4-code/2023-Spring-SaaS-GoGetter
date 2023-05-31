@@ -22,7 +22,7 @@
       <!--profile dropdwon-->
       <div ngbDropdown class="d-inline-block">
         <button type="button" class="btn custom-dropdown-toggle" ngbDropdownToggle id="userdropdown">
-          <img src="../assets/image/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          <img src={{user.picture}} alt="mdo" width="32" height="32" class="rounded-circle">
         </button>
         <div ngbDropdownMenu aria-labelledby="userdropdown" class="dropdown-menu dropdown-menu-end">
           <button ngbDropdownItem>{{user.name}}</button>

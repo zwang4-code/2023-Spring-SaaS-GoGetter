@@ -68,7 +68,8 @@ usersCollection.insert({
     oauthId: "117027176084175812322",
     name: "Preedhi Garg",
     email: "gargpreedhi@gmail.com",
-    goalCreated: 2
+    goalCreated: 2,
+    picture: "https://lh3.googleusercontent.com/a/AAcHTteZbkVqctfrbfNzZ_Wr5LiU2_CLb10oGYv8i43s=s100"
 }
 )
 
@@ -77,7 +78,8 @@ usersCollection.insert({
     oauthId: "113188584359730329106",
     name: "Zi Wang",
     email: "zi@gmail.com",
-    goalCreated: 2
+    goalCreated: 2,
+    picture: "https://lh3.googleusercontent.com/a/AAcHTteVGq4lqXEocZoyUou14Fpn-jikL_xBhHdfXpIr=s100"
 })
 
 //REMINDERS COLLECTION

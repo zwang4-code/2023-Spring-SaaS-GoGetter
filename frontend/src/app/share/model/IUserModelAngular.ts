@@ -7,5 +7,6 @@ export interface IUserModelAngular{
     goalCreated: number;
     name: string;
     email: string;
+    picture: string;
   }
   

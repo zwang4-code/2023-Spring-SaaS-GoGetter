@@ -17,6 +17,7 @@ class UserModel {
             name: { type: String, required: true },
             email: { type: String, required: true },
             goalCreated: { type: Number },
+            picture: { type: String },
         }, { collection: 'users', versionKey: false });
     }
     createModel() {

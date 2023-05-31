@@ -7,4 +7,5 @@ export class UserModel{
   goalCreated?: number;
   name?: string;
   email?: string;
+  picture?:string;
 }
