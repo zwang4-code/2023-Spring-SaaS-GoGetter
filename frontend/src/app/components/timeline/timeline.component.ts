@@ -30,6 +30,11 @@ export class TimelineComponent {
   }
 
   ngOnInit() {
+    this.goals.sort((a, b) => {
+      const endDateA = new Date(a.endDate);
+      const endDateB = new Date(b.endDate);
+      return endDateA.getTime() - endDateB.getTime();
+    });
     this.getCheckboxStatus()
   }
 
@@ -70,5 +75,28 @@ export class TimelineComponent {
   openEditGoal(goal: IGoalModelAngular): void {
     // Navigate to the edit goal component passing the goal ID as a parameter
     this.router.navigate(['/update', goal.goalId]);
+  }
+
+  getProgressWidth(progress: ProgressEnum): string {
+    if (progress === ProgressEnum.NotStarted) {
+      return '0%';
+    } else if (progress === ProgressEnum.InProgress) {
+      return '50%';
+    } else if (progress === ProgressEnum.Completed) {
+      return '100%';
+    } else {
+      return '0%'; // Default width
+    }
+  }
+  getProgressBarClass(progress: ProgressEnum): string {
+    if (progress === ProgressEnum.NotStarted) {
+      return 'bg-primary';
+    } else if (progress === ProgressEnum.InProgress) {
+      return 'bg-warning';
+    } else if (progress === ProgressEnum.Completed) {
+      return 'bg-success';
+    } else {
+      return ''; // No additional class
+    }
   }
 }
