@@ -25,8 +25,8 @@
           <img src="../assets/image/user.png" alt="mdo" width="32" height="32" class="rounded-circle">
         </button>
         <div ngbDropdownMenu aria-labelledby="userdropdown" class="dropdown-menu dropdown-menu-end">
-          <button ngbDropdownItem>Username</button>
-          <button ngbDropdownItem>Email</button>
+          <button ngbDropdownItem>{{user.name}}</button>
+          <button ngbDropdownItem>{{user.email}}</button>
           <button ngbDropdownItem>Sign Out</button>
         </div>
       </div>
