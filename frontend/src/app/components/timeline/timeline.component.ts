@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GoalService } from 'src/app/service/goal-service.service';
 import { IGoalModelAngular } from 'src/app/share/model/IGoalModelAngular';
@@ -9,7 +8,7 @@ import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  styleUrls: ['./timeline.component.css'],
 })
 export class TimelineComponent {
   goalsObservable: Observable<IGoalModelAngular[]>;
@@ -18,7 +17,7 @@ export class TimelineComponent {
   Progress = ProgressEnum;
   checked = false;
 
-  constructor(private goalService: GoalService, private router: Router, activatedRoute: ActivatedRoute) {
+  constructor(private goalService: GoalService, private router: Router) {
     // This is for getting all of the goals
     this.Progress = ProgressEnum;
     this.goalsObservable = goalService.getAllGoals();
@@ -99,4 +98,17 @@ export class TimelineComponent {
       return ''; // No additional class
     }
   }
+
+  open(goalId: string) {
+    let text;
+    if (confirm("Are you sure you want to delete this goal?") == true) {
+      this.deleteGoal(goalId);
+    } else {
+      text = "You canceled!";
+    }
+	}
+ 
 }
+
+
+

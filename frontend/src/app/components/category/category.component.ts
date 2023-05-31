@@ -87,4 +87,13 @@ export class CategoryComponent {
     return this.goals.some(goal => currCategory.includes(goal.category));
   }
 
+  open(goalId: string) {
+    let text;
+    if (confirm("Are you sure you want to delete this goal?") == true) {
+      this.deleteGoal(goalId);
+    } else {
+      text = "You canceled!";
+    }
+	}
+
 }
