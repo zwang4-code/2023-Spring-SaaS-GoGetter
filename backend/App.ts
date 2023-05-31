@@ -19,7 +19,7 @@ class App {
   public Goals: GoalModel;
   public Users: UserModel;
   public Reminders: ReminderModel;
-  public googlePassportObj:GooglePassportObj;
+  public googlePassportObj: GooglePassportObj;
 
   //Run configuration methods on the Express instance.
   constructor() {
@@ -53,7 +53,7 @@ class App {
     });
   }
 
-  private validateAuth(req, res, next):void {
+  private validateAuth(req, res, next): void {
     if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
     console.log("user is not authenticated");
     res.redirect('/');
@@ -65,19 +65,19 @@ class App {
     let router = express.Router();
     //GOOGLE OAUTH
 
-    router.get('/auth/google', 
-    passport.authenticate('google', {scope: ['profile']}) );
-    
-    router.get('/auth/google/callback', 
-    passport.authenticate('google', 
-      { failureRedirect: '/' }
-    ),
-    (req, res) => {
-      console.log("successfully authenticated user and returned to callback page.");
-      console.log("redirecting to /#/category");
-      res.redirect('/#/category');
-    } 
-  );
+    router.get('/auth/google',
+      passport.authenticate('google', { scope: ['profile'] }));
+
+    router.get('/auth/google/callback',
+      passport.authenticate('google',
+        { failureRedirect: '/' }
+      ),
+      (req, res) => {
+        console.log("successfully authenticated user and returned to callback page.");
+        console.log("redirecting to /#/category");
+        res.redirect('/#/category');
+      }
+    );
 
     //--------------------------------------------GOAL CRUD--------------------------------------
 
@@ -97,23 +97,23 @@ class App {
     // GET: http://localhost:8080/app/goal
     // GET: http://localhost:8080/app/goal?category=Health
     // GET: http://localhost:8080/app/goal?progress=In Progress
-    router.get('/app/goal',this.validateAuth, (req: any, res: any) => {
+    router.get('/app/goal', this.validateAuth, (req: any, res: any) => {
       let profile = req.user;
       if (req.query.hasOwnProperty('category')) {
         const _category = req.query.category;
         console.log('Category: ' + _category);
-        this.Goals.retrieveGoalsbyProperties(res, { category: _category});
-      } 
-      else if (req.query.hasOwnProperty('progress')){
+        this.Goals.retrieveGoalsbyProperties(res, { category: _category });
+      }
+      else if (req.query.hasOwnProperty('progress')) {
         const _progress = req.query.progress;
         console.log('Progress: ' + _progress);
-        this.Goals.retrieveGoalsbyProperties(res, { progress: _progress});
-      } 
+        this.Goals.retrieveGoalsbyProperties(res, { progress: _progress });
+      }
       else {
         console.log('Query all goals');
-        this.Goals.retrieveAllGoals(res, {userId: profile.id});
+        this.Goals.retrieveAllGoals(res, { userId: profile.id });
       }
-     
+
     });
 
     // Retrieve one goal by goalId
@@ -150,7 +150,7 @@ class App {
       var newUserEmail = newUserInfo.email   // email will be used to check for existing user
       newUserInfo.userId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
       console.log('Add new user to database');
-      this.Users.createNewUser(res, newUserInfo, {email: newUserEmail});
+      this.Users.createNewUser(res, newUserInfo, { email: newUserEmail });
     });
 
     // Retrieve all users
@@ -199,8 +199,8 @@ class App {
     // Retrieve all reminder
     // GET: http://localhost:8080/app/reminder
     router.get('/app/reminder', (req, res) => {
-        console.log('Query all reminder');
-        this.Reminders.retrieveAllReminder(res);
+      console.log('Query all reminder');
+      this.Reminders.retrieveAllReminder(res);
     });
 
     // Retrieve one reminder by reminderId
@@ -219,8 +219,40 @@ class App {
       this.Reminders.deleteReminder(res, { reminderId: id })
     });
 
+    //--------------------------------------------GOAL MOCHA TEST API--------------------------------------
+    //------To bypass authentication logic, duplicate API routes are created for testing purpose----------
+
+    // Test retrieve all goals
+    router.get('/test/app/goal', (req: any, res: any) => {
+      console.log('Query all goals');
+      this.Goals.retrieveAllGoals(res, {});
+    });
+
+    // Test retrieve one goal by goalId
+    router.get('/test/app/goal/:goalId', (req: any, res: any) => {
+      let profile = req.user;
+      var id = req.params.goalId;
+      console.log('GoalId: ' + id);
+      this.Goals.retrieveGoalDetails(res, { goalId: id });
+    });
+
+    // Test create a goal
+    router.post('/test/app/goal', async (req: any, res: any) => {
+      var newGoalInfo = req.body;
+      newGoalInfo.goalId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
+      console.log('Create new goal with goalId:' + newGoalInfo.goalId);
+      this.Goals.createNewGoal(res, newGoalInfo);
+    });
+
+    // Test delete one goal for one user
+    router.delete('/test/app/goal/:goalId', (req, res) => {
+      var id = req.params.goalId;
+      console.log('GoalId to be deleted: ' + id);
+      this.Goals.deleteGoal(res, { goalId: id })
+    });
+
     this.expressApp.use('/', router);
-    this.expressApp.use('/', express.static(__dirname+'/dist/'));
+    this.expressApp.use('/', express.static(__dirname + '/dist/'));
   }
 }
 

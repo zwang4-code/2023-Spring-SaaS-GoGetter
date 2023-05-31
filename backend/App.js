@@ -192,6 +192,33 @@ class App {
             console.log('reminderId to be deleted: ' + id);
             this.Reminders.deleteReminder(res, { reminderId: id });
         });
+        //--------------------------------------------GOAL MOCHA TEST API--------------------------------------
+        //------To bypass authentication logic, these API routes are created for testing purpose----------
+        // Test retrieve all goals
+        router.get('/test/app/goal', (req, res) => {
+            console.log('Query all goals');
+            this.Goals.retrieveAllGoals(res, {});
+        });
+        // Test retrieve one goal by goalId
+        router.get('/test/app/goal/:goalId', (req, res) => {
+            let profile = req.user;
+            var id = req.params.goalId;
+            console.log('GoalId: ' + id);
+            this.Goals.retrieveGoalDetails(res, { goalId: id });
+        });
+        // Test create a goal
+        router.post('/test/app/goal', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            var newGoalInfo = req.body;
+            newGoalInfo.goalId = crypto.randomBytes(16).toString("hex"); // generate random ID to assign to new user 
+            console.log('Create new goal with goalId:' + newGoalInfo.goalId);
+            this.Goals.createNewGoal(res, newGoalInfo);
+        }));
+        // Delete one goal for one user
+        router.delete('/test/app/goal/:goalId', (req, res) => {
+            var id = req.params.goalId;
+            console.log('GoalId to be deleted: ' + id);
+            this.Goals.deleteGoal(res, { goalId: id });
+        });
         this.expressApp.use('/', router);
         this.expressApp.use('/', express.static(__dirname + '/dist/'));
     }
