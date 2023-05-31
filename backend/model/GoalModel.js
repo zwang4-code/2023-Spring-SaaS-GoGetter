@@ -37,14 +37,14 @@ class GoalModel {
         this.model = mongooseConnection.model("Goal", this.schema);
     }
     createNewGoal(response, newGoalInfo) {
-        this.model.create([newGoalInfo], (err) => {
+        this.model.create([newGoalInfo], (err, createdGoal) => {
             if (err) {
                 console.log(err);
                 response.status(500).json({ error: err.message });
             }
             else {
                 console.log('New goal added successfully');
-                response.json({ message: 'New goal added successfully' });
+                response.json(createdGoal);
             }
         });
     }

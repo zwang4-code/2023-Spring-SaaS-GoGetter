@@ -47,14 +47,14 @@ class GoalModel {
     }
 
     public createNewGoal(response: any, newGoalInfo: Object): void {
-      this.model.create([newGoalInfo], (err: any) => {
+      this.model.create([newGoalInfo], (err: any, createdGoal: any) => {
                   if (err) {
                       console.log(err);
                       response.status(500).json({ error: err.message });
                   }
                   else {
                       console.log('New goal added successfully')
-                      response.json({message: 'New goal added successfully'});
+                      response.json(createdGoal);
                   }
               });
   }
