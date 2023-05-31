@@ -24,16 +24,17 @@ export class TimelineComponent {
     this.goalsObservable.subscribe((result) => {
         this.goals = result;
         this.goalsListCopy = this.goals;  // save the full list of goals in a separate copy
+
+        this.goals.sort((a, b) => {
+          const dateA = new Date(a.endDate);
+          const dateB = new Date(b.endDate);
+          return dateA.getTime() - dateB.getTime();
+        });
       })
 
   }
 
   ngOnInit() {
-    this.goals.sort((a, b) => {
-      const endDateA = new Date(a.endDate);
-      const endDateB = new Date(b.endDate);
-      return endDateA.getTime() - endDateB.getTime();
-    });
     this.getCheckboxStatus()
   }
 
