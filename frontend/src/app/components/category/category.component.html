@@ -19,12 +19,12 @@
 <hr>
 
 <!--Make for each Category collapsable and expandable-->
-<div ngbAccordion style="width:70%" class="accordion-container">
+<div ngbAccordion style="width:80%" class="accordion-container">
   <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal">
     <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])" >
       <!--Category name as Accordion Button-->
       <button ngbAccordionButton class = "category">
-        <img src="assets/image/target.jpeg" width="40" height="40" class="rounded" class="rounded-circle flex-shrink-0">
+        <img src="assets/image/target.jpeg" width="30" height="30" class="rounded" class="rounded-circle flex-shrink-0">
         {{ category }}
       </button>
     </div>

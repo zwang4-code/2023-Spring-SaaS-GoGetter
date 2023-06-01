@@ -1,24 +1,45 @@
-<app-nav></app-nav>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<div>
-  <!--Name of the this page-->
-  <h2 style="color: #8c4ca6">
-    Look at the badges that you accomplished!
-  </h2>
-  <span>
-    <!--Default badge that the user will recieve when they have an account with us-->
-    <img src="../assets/image/welcome.png" alt="Your Image" title="Welcome!"  width="80" height="80" class="rounded-circle">
-  </span>
-  <span *ngIf="numOfGoals >= 1">
-    <!--Badge that the user will recieve when they created 1 goal-->
-    <img src="../assets/image/firstGoalCreated.png" alt="Your Image" title="First goal created!"  width="80" height="80" class="rounded-circle">
-  </span>
-  <span *ngIf="numOfGoals >= 5">
-    <!--Badge that the user will recieve when they created 5 goals-->
-    <img src="../assets/image/firstFiveGoalsCreated.png" alt="Your Image" title="Five goals created!"  width="80" height="80" class="rounded-circle">
-  </span>
-  <span *ngIf="numOfGoals >= 10">
-    <!--Badge that the user will recieve when they created 5 goals-->
-    <img src="../assets/image/tenGoalsCreated.png" alt="Your Image" title="Ten goals created!"  width="80" height="80" class="rounded-circle">
-  </span>
-</div>
+<app-nav></app-nav>
+<br>
+
+<h2 style="color: #8c4ca6">
+  Look at the badges that you accomplished!
+</h2>
+
+<p class = "alerts">
+	<ngb-alert [dismissible]="false">
+		<strong>Hey!</strong> Want to earn more badges? Go create more goals!
+	</ngb-alert>
+</p>
+
+<hr>
+<br>
+
+<div class="container marketing">
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <div class="col-lg-4">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/welcome.png" alt="Placeholder">
+      <h2 class="fw-normal">Welcome Badge</h2>
+      <p>Congratulations!! You just earned your first badge by creating an account with GoGetter. Let's be better.</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 1">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/firstGoalCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">First Goal Badge</h2>
+      <p>You just created your first goal. We hope you accomplish it like a charm. We are in this together.</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 5">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/firstFiveGoalsCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">Five Goal Badge</h2>
+      <p>Woah!!! Congratulations on creating 5 goals. You really getting better. And we are loving it.</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 10">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/tenGoalsCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">Ten Goal Badge</h2>
+      <p>Yayyyy!! Your 10th goal. You have a long way to go and we are there to help you with GoGetter.</p>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
+
+</div><!-- /.container -->
