@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GoalService } from '../../../service/goal-service.service';
 import { ProgressEnum } from 'src/app/share/enum/ProgressEnum';
 
+
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',

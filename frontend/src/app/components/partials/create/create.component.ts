@@ -3,6 +3,7 @@ import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel';
 import { GoalService } from '../../../service/goal-service.service';
 import { UserModel } from '../../../share/model/UserModel';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +15,7 @@ export class CreateComponent {
   newGoal: GoalModel
   categories: CategoryEnum[];
 
-  constructor(private goalService: GoalService) {
+  constructor(private goalService: GoalService, private location: Location) {
     this.newGoal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
   }
@@ -45,4 +46,8 @@ export class CreateComponent {
         },
       });
   }  
+
+  goBack() {
+    this.location.back();
+  }
 }
