@@ -232,7 +232,6 @@ describe('Test "Create a New Goal"', function () {
 
 	// Perform delete request to delete the newly created goal inside the callback function of the POST request (to return database to initial state)
 	after(function (done) {
-		console.log(newGoalID)
 		chai.request("http://localhost:8080")
 			.delete("/test/app/goal/" + newGoalID)
 			.end(function (err, res) {
