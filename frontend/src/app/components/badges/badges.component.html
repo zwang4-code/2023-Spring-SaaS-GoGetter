@@ -30,6 +30,21 @@
       <h2 class="fw-normal">First Goal Badge</h2>
       <p>You just created your first goal. We hope you accomplish it like a charm. We are in this together.</p>
     </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 2">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/secondGoalCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">Second Goal Badge</h2>
+      <p>You just created your second goal! Keep up the good work!</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 3">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/thirdGoalCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">Third Goal Badge</h2>
+      <p>You just created your third goal! You got this!</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4" *ngIf="user.goalCreated >= 4">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/fourthGoalCreated.png" alt="Placeholder">
+      <h2 class="fw-normal">Fourth Goal Badge</h2>
+      <p>You just created your fourth goal! Hooray!</p>
+    </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 5">
       <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/firstFiveGoalsCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Five Goal Badge</h2>
