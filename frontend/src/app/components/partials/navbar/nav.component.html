@@ -18,13 +18,13 @@
     </ul>
     <span class="navbar-text">
       <img src="../assets/image/pie.png" routerLink="/summary" width="32" height="32" class="rounded-circle">
-      &nbsp;&nbsp;
       <!--profile dropdwon-->
       <div ngbDropdown class="d-inline-block">
         <button type="button" class="btn custom-dropdown-toggle" ngbDropdownToggle id="userdropdown">
           <img src={{user.picture}} alt="mdo" width="32" height="32" class="rounded-circle">
         </button>
         <div ngbDropdownMenu aria-labelledby="userdropdown" class="dropdown-menu dropdown-menu-end">
+          <button ngbDropdownItem>{{user.userId}}</button>
           <button ngbDropdownItem>{{user.name}}</button>
           <button ngbDropdownItem>{{user.email}}</button>
           <button ngbDropdownItem (click)="signOut()" >Sign Out</button>
