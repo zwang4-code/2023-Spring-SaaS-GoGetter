@@ -20,7 +20,7 @@ export class SummaryComponent implements OnInit {
     '#36a2eb',   // Category 2
     '#ffce56',   // Category 3
     '#4bc0c0',   // Category 4
-    '#9966cc',   // Category 5
+    '#D3B396',   // Category 5
     '#ff8c00'    // Category 6
   ];
 
@@ -37,7 +37,7 @@ export class SummaryComponent implements OnInit {
     const chartData = this.getChartDataByCategory(goals);
     const chartOptions = {
       responsive: true,
-      aspectRatio: 3.5,
+      aspectRatio: 2.5,
       plugins: {
         legend: {
           display: true,
@@ -59,7 +59,7 @@ export class SummaryComponent implements OnInit {
     ];
     const chartOptions = {
       responsive: true,
-      aspectRatio: 3.5,
+      aspectRatio: 2.5,
       plugins: {
         legend: {
           display: true, 
