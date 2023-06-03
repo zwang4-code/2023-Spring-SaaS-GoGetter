@@ -37,7 +37,7 @@ class App {
   private middleware(): void {
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-    this.expressApp.use(session({ secret: 'gogettersecret' }));
+    this.expressApp.use(session({ secret: 'gogettersecret'}));
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());
@@ -68,37 +68,59 @@ class App {
     router.get('/auth/google',
       passport.authenticate('google', { scope: ['profile'] }));
 
-    router.get('/auth/google/callback',
-      passport.authenticate('google',
-        { failureRedirect: '/' }
-      ),
-      (req, res) => {
-        console.log("successfully authenticated user and returned to callback page.");
-        console.log("redirecting to /#/category");
-        res.redirect('/#/category');
+    // router.get('/auth/google/callback',
+    //   passport.authenticate('google',
+    //     { failureRedirect: '/' }
+    //   ),
+    //   (req, res) => {
+    //     session.userId = "1"
+    //     console.log("successfully authenticated user and returned to callback page.");
+    //     console.log("redirecting to /#/category");
+    //     res.redirect('/#/category');
+    //   }
+    // );
+
+    router.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/' }), 
+    async (req: any, res: any) => {
+      try {
+        const userId = await this.Users.getUserIdByOauthId(req.user.id);
+        if (userId) {
+          // Store the userId in the session
+          session.userId = userId;
+          console.log("successfully authenticated user and returned to callback page.");
+          console.log("redirecting to /#/category");
+          res.redirect('/#/category');
+        } else {
+          console.log("User not found");
+          res.redirect('/login');
+        }
+      } catch (error) {
+        console.error("Error retrieving userId:", error);
+        res.redirect('/login');
       }
-    );
+    });
+    
 
     //--------------------------------------------GOAL CRUD--------------------------------------
 
     // Create a goal
     // POST: http://localhost:8080/app/goal
     router.post('/app/goal',this.validateAuth, async (req: any, res: any) => {
-      let profile = req.user;
       var newGoalInfo = req.body;
-      newGoalInfo.userId = profile.id;
+      newGoalInfo.userId = session.userId;
       newGoalInfo.reminder = false;
       newGoalInfo.goalId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
       console.log('Create new goal with goalId:' + newGoalInfo.goalId);
       this.Goals.createNewGoal(res, newGoalInfo);
     });
+    
 
     // Retrieve all goals
     // GET: http://localhost:8080/app/goal
     // GET: http://localhost:8080/app/goal?category=Health
     // GET: http://localhost:8080/app/goal?progress=In Progress
     router.get('/app/goal', this.validateAuth, (req: any, res: any) => {
-      let profile = req.user;
       if (req.query.hasOwnProperty('category')) {
         const _category = req.query.category;
         console.log('Category: ' + _category);
@@ -111,7 +133,7 @@ class App {
       }
       else {
         console.log('Query all goals');
-        this.Goals.retrieveAllGoals(res, { userId: profile.id });
+        this.Goals.retrieveAllGoals(res, { userId: session.userId });
       }
 
     });
@@ -230,7 +252,6 @@ class App {
 
     // Test retrieve one goal by goalId
     router.get('/test/app/goal/:goalId', (req: any, res: any) => {
-      let profile = req.user;
       var id = req.params.goalId;
       console.log('GoalId: ' + id);
       this.Goals.retrieveGoalDetails(res, { goalId: id });

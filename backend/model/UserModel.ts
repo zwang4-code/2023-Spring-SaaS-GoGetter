@@ -1,7 +1,5 @@
 import { DataAccess } from '../DataAccess';
 import { IUserModel } from '../interfaces/IUserModel';
-import { FavoriteEnum } from '../enum/FavoriteEnum';
-import { STATUS_CODES } from "http";
 import Mongoose = require("mongoose");
 
 let mongooseConnection = DataAccess.mongooseConnection;
@@ -35,6 +33,11 @@ class UserModel {
     }
 
     //--------------------------------------------USER CRUD METHODS--------------------------------------
+
+    public getUserIdByOauthId = async function (oauthId: string): Promise<string | null> {
+        const user = await this.model.findOne({ oauthId });
+        return user ? user.userId : null;
+      };
 
     public createNewUser(response: any, newUserInfo: Object, emailFilter: Object): void {
         this.checkUserExists(emailFilter, (exists) => {

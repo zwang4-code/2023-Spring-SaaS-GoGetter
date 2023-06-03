@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CategoryEnum } from '../../../share/enum/CategoryEnum'
 import { GoalModel } from '../../../share/model/GoalModel';
 import { GoalService } from '../../../service/goal-service.service';
-import { UserModel } from '../../../share/model/UserModel';
 import { Location } from '@angular/common';
 
 @Component({
@@ -19,6 +18,7 @@ export class CreateComponent {
     this.newGoal = new GoalModel()
     this.categories = Object.values(CategoryEnum);
   }
+  
 
   onSubmit() {
     console.log('\ngoal created')
