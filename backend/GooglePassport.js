@@ -2,9 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const GoogleOauth_1 = require("./GoogleOauth");
 let passport = require('passport');
-//let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 let GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
-// Creates a Passport configuration for Google
 class GooglePassport {
     constructor() {
         this.clientId = GoogleOauth_1.default.id;
@@ -13,15 +11,13 @@ class GooglePassport {
             clientID: this.clientId,
             clientSecret: this.secretId,
             callbackURL: "/auth/google/callback"
-            //                profileFields: ['id', 'displayName', 'emails']
         }, (accessToken, refreshToken, profile, done) => {
-            console.log("inside new password google strategy");
+            console.log("Google Information");
             process.nextTick(() => {
-                console.log('validating google profile:' + JSON.stringify(profile));
-                console.log("userId:" + profile.id);
-                console.log("displayName: " + profile.displayName);
-                console.log("retrieve all of the profile info needed");
-                // this.email = profile.emails[0].value;
+                console.log("oAuth Id: " + profile.id);
+                console.log("Display Name: " + profile.displayName);
+                console.log("Profile Pic: " + profile.photos[0].value);
+                console.log("----------------------------------------------------------------------------------------");
                 return done(null, profile);
             });
         }));

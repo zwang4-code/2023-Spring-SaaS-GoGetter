@@ -65,20 +65,7 @@ class App {
     let router = express.Router();
     //GOOGLE OAUTH
 
-    router.get('/auth/google',
-      passport.authenticate('google', { scope: ['profile'] }));
-
-    // router.get('/auth/google/callback',
-    //   passport.authenticate('google',
-    //     { failureRedirect: '/' }
-    //   ),
-    //   (req, res) => {
-    //     session.userId = "1"
-    //     console.log("successfully authenticated user and returned to callback page.");
-    //     console.log("redirecting to /#/category");
-    //     res.redirect('/#/category');
-    //   }
-    // );
+    router.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }));
 
     router.get('/auth/google/callback', 
     passport.authenticate('google', { failureRedirect: '/' }), 
@@ -88,8 +75,8 @@ class App {
         if (userId) {
           // Store the userId in the session
           session.userId = userId;
-          console.log("successfully authenticated user and returned to callback page.");
-          console.log("redirecting to /#/category");
+          console.log("User id succesfully authenticated");
+          console.log("Redirecting to Category Page");
           res.redirect('/#/category');
         } else {
           console.log("User not found");
