@@ -16,12 +16,12 @@ export class SummaryComponent implements OnInit {
   @ViewChild('progressChartCanvas') progressChartCanvas!: ElementRef;
 
   private categoryColors: string[] = [
-    '#ff6384',   // Category 1
-    '#36a2eb',   // Category 2
-    '#ffce56',   // Category 3
-    '#4bc0c0',   // Category 4
-    '#D3B396',   // Category 5
-    '#ff8c00'    // Category 6
+    '#C1A3A3',   // Category 1
+    '#DBDFEA',   // Category 2
+    '#C8DBBE',   // Category 3
+    '#E7CBCB',   // Category 4
+    '#E1D4BB',   // Category 5
+    '#B7D3DF'    // Category 6
   ];
 
   constructor(private goalService: GoalService) { }
@@ -43,7 +43,7 @@ export class SummaryComponent implements OnInit {
           display: true,
           labels: {
             filter: (legendItem: { index: number; }, chartData: any) => legendItem.index !== 0  // Filter out the first label
-          } 
+          }
         }
       }
     };
@@ -53,16 +53,16 @@ export class SummaryComponent implements OnInit {
   createProgressChart(goals: IGoalModelAngular[]) {
     const chartData = this.getChartDataByProgress(goals);
     const progressColors = [
-      '#ff6384',   // Not Started
-      '#36a2eb',   // In Progress
-      '#4bc0c0'   // Completed
+      '#F2D7D9',   // Not Started
+      '#D3CEDF',   // In Progress
+      '#748DA6'   // Completed
     ];
     const chartOptions = {
       responsive: true,
       aspectRatio: 2.5,
       plugins: {
         legend: {
-          display: true, 
+          display: true,
         }
       }
     };
