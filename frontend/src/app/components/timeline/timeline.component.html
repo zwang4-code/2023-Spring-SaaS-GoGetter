@@ -4,14 +4,14 @@
 <app-nav></app-nav>
 
 <hr>
-<div class="d-flex flex-row justify-content-between">
+<div class="d-flex flex-row justify-content-start">
   <div class="p-2">
     <h3 style="color: #8c4ca6">My Goals
       <!--Plus sign to create goal-->
-      <img src="assets/image/create.png" width="40" height="40" class="rounded" routerLink="/create" alt="..." placement="bottom" ngbTooltip="Click to create goals">
+      <img src="assets/image/create-plus-sign.png" width="40" height="40" class="rounded" routerLink="/create" alt="..." placement="bottom" ngbTooltip="Click to create goals">
     </h3>
   </div>
-  <div class="p-2">
+  <div class="p-2 mt-2">
     <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="check" [(ngModel)]="checked" (click)="handleHideCheckbox()">
       <label class="form-check-label" for="check">Hide Completed</label>
@@ -39,7 +39,7 @@
 			</td>
 			<td style="width: 15%; text-align: center;">
         <div class=" progress">
-          <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="getProgressWidth(goal.progress)" [ngClass]="getProgressBarClass(goal.progress)" aria-valuemin="0" aria-valuemax="100" placement="bottom" ngbTooltip={{goal.progress}}>
+          <div class="progress-bar progress-bar" role="progressbar" [style.width]="getProgressWidth(goal.progress)" [ngClass]="getProgressBarClass(goal.progress)" aria-valuemin="0" aria-valuemax="100" placement="bottom" ngbTooltip={{goal.progress}}>
           </div>
         </div>
       </td>

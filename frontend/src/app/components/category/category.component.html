@@ -1,14 +1,18 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
 <app-nav></app-nav>
-<hr>
 <!--My Goals-->
-<div class="d-flex flex-row justify-content-between">
+<div class="d-flex flex-row justify-content-start pt-3 pb-1">
   <div class="p-2">
     <h3 style="color: #8c4ca6">My Goals
       <!--Plus sign to create goal-->
-      <img src="assets/image/create.png" width="40" height="40" class="rounded" routerLink="/create" alt="..." placement="bottom" ngbTooltip="Click to create goals">
+      <img src="assets/image/create-plus-sign.png" width="40" height="40" class="rounded" routerLink="/create" alt="..."
+        placement="bottom" ngbTooltip="Click to create goals">
     </h3>
   </div>
-  <div class="p-2">
+  <div class="p-2 mt-2">
     <!--Checkbox to hide completed goals-->
     <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="check" [(ngModel)]="checked" (click)="handleHideCheckbox()">
@@ -16,32 +20,35 @@
     </div>
   </div>
 </div>
-<hr>
 
-<!--Make for each Category collapsable and expandable-->
-<div ngbAccordion style="width:80%" class="accordion-container">
-  <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal">
-    <div ngbAccordionHeader class="card-header" *ngIf="hasGoalsInCategories([category])" >
-      <!--Category name as Accordion Button-->
-      <button ngbAccordionButton class = "category">
-        <img src="assets/image/target.jpeg" width="30" height="30" class="rounded" class="rounded-circle flex-shrink-0">
-        {{ category }}
-      </button>
-    </div>
-    <!--Category content that can be collapsed or expanded-->
-    <div ngbAccordionCollapse>
-      <div ngbAccordionBody>
-        <ng-template>
-          <div class="card-body">
-            <ul class="list-group" >
-              <ng-container *ngFor="let goal of goals; let i = index"  >
-                <li class="list-group-item" *ngIf="goal.category == category" style="font-size:20px">
+<div class="d-flex bd-highlight">
+  <div class="p-2 bd-highlight"></div>
+
+  <!--Make for each Category collapsable and expandable-->
+  <div ngbAccordion style="width:80%" class="accordion-container px-5 flex-grow-1 bd-highlight" style="font-family: 'Playfair Display', serif;">
+    <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal"
+      style="border: 0.2px solid #a598bb">
+      <div ngbAccordionHeader *ngIf="hasGoalsInCategories([category])">
+        <!--Category name as Accordion Button-->
+        <button ngbAccordionButton class="category">
+          <img src="assets/image/target.jpeg" width="30" height="30" class="rounded-circle flex-shrink-0"
+            style="border: 2.5px solid #D8BFD8; border-radius: 90%;">
+          <span style="color: #8c4ca6;"> &nbsp;&nbsp;{{ category }}</span>
+        </button>
+      </div>
+      <!--Category content that can be collapsed or expanded-->
+      <div ngbAccordionCollapse>
+        <div ngbAccordionBody>
+          <ng-template>
+            <ul class="list-group">
+              <ng-container *ngFor="let goal of goals; let i = index">
+                <li class="list-group-item" *ngIf="goal.category == category">
                   <div class="d-flex flex-row bd-highlight justify-content-between">
-                    <div class="p-2 bd-highlight" class = "goal-title">
+                    <div class="bd-highlight">
                       <button type="button" class="btn" (click)="collapse.toggle()"
                         [attr.aria-expanded]="!goalIsCollapsed[i]" aria-controls="collapseExample + i">
                         <!--show rightward caret if goal is collapsed-->
-                        <span *ngIf="goalIsCollapsed[i]" >
+                        <span *ngIf="goalIsCollapsed[i]">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(153, 50, 153)"
                             class="bi bi-caret-right" viewBox="0 0 16 16">
                             <path
@@ -57,17 +64,19 @@
                           </svg>
                         </span>
                       </button>
-                      <!--goal title-->
-                      {{ goal.title }}
-                      <!--goal progress-->
-                      <span class="badge badge-pill" [ngClass]="{
-                      'badge-info': goal.progress === progress.NotStarted,
-                      'badge-warning': goal.progress === progress.InProgress,
-                      'badge-success': goal.progress === progress.Completed}">
-                        {{ goal.progress }}
+                      <span style="font-family: 'Playfair Display', serif; font-size:15.5px">
+                        <!--goal title-->
+                        {{ goal.title }}
                       </span>
                     </div>
-                    <div class="p-2 bd-highlight">
+                    <div>
+                      <!--goal progress-->
+                      <span class="badge badge-pill; bd-highlight px-3" style="font-size: 12px;" [ngClass]="{
+                                          'badge-info': goal.progress === progress.NotStarted,
+                                          'badge-warning': goal.progress === progress.InProgress,
+                                          'badge-success': goal.progress === progress.Completed}">
+                        {{ goal.progress }}
+                      </span>
                       <!--three dot drop down box-->
                       <div ngbDropdown class="d-inline-block">
                         <button type="button" class="btn custom-dropdown-toggle" ngbDropdownToggle>
@@ -80,7 +89,8 @@
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="custom-dropdown-menu">
 
                           <!--delete goal button-->
-                          <button ngbDropdownItem class="btn btn-outline-danger" (click)="open(goal.goalId)" placement="top" ngbTooltip="Delete Goal">
+                          <button ngbDropdownItem class="btn btn-outline-danger" (click)="open(goal.goalId)"
+                            placement="top" ngbTooltip="Delete Goal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(220, 53, 69)"
                               class="bi bi-trash" viewBox="0 0 16 16">
                               <path
@@ -90,7 +100,8 @@
                             </svg>
                           </button>
                           <!--edit goal button-->
-                          <button ngbDropdownItem class="btn btn-outline-primary " (click)="openEditGoal(goal)" placement="top" ngbTooltip="Update Goal">
+                          <button ngbDropdownItem class="btn btn-outline-primary " (click)="openEditGoal(goal)"
+                            placement="top" ngbTooltip="Update Goal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(0, 123, 255)"
                               class="bi bi-pencil-square" viewBox="0 0 16 16">
                               <path
@@ -106,23 +117,28 @@
 
                   <!--Collapsable goal details-->
                   <div #collapse="ngbCollapse" [(ngbCollapse)]="goalIsCollapsed[i]">
-                    <div class="card" >
-                      <div class="card-body"  style="font-size:15px">
-                        <div style="font-family: Cambria"><b>Description:</b> {{goal.description}}</div>
-                        <div style="font-family:Cambria"><b>Start date:</b> {{goal.startDate | date}}</div>
-                        <div style="font-family: Cambria"><b>End date:</b> {{goal.endDate | date}}</div>
-                        <div style="font-family: Cambria">
-                          
-                          <ng-container *ngIf="goal.reminder; else crossedBellIcon">
-                            <i class="bi bi-bell-fill"></i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16" placement="bottom" ngbTooltip="Reminder On">
-                              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                            </svg>
-                          </ng-container>
+                    <div style="padding: 0px 0px 12px 45px;">
+                      <div style="font-size:13px; font-family: 'Playfair Display', serif;">
+                        <div><b>Description:</b> {{goal.description}}</div>
+                        <div><b>Start date:</b> {{goal.startDate | date}}</div>
+                        <div><b>End date:</b> {{goal.endDate | date}}</div>
+                        <div>
+                          <!--Reminder Feature to come in future-->
+                          <!-- <ng-container *ngIf="goal.reminder; else crossedBellIcon">
+                          <i class="bi bi-bell-fill"></i>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-bell-fill" viewBox="0 0 16 16" placement="bottom" ngbTooltip="Reminder On">
+                            <path
+                              d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                          </svg>
+                        </ng-container> -->
                           <ng-template #crossedBellIcon>
                             <i class="bi bi-bell-slash-fill"></i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-slash-fill" viewBox="0 0 16 16" placement="bottom" ngbTooltip="Reminder Off">
-                              <path d="M5.164 14H15c-1.5-1-2-5.902-2-7 0-.264-.02-.523-.06-.776L5.164 14zm6.288-10.617A4.988 4.988 0 0 0 8.995 2.1a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 7c0 .898-.335 4.342-1.278 6.113l9.73-9.73zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-bell-slash-fill" viewBox="0 0 16 16" placement="bottom"
+                              ngbTooltip="Reminder Off">
+                              <path
+                                d="M5.164 14H15c-1.5-1-2-5.902-2-7 0-.264-.02-.523-.06-.776L5.164 14zm6.288-10.617A4.988 4.988 0 0 0 8.995 2.1a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 7c0 .898-.335 4.342-1.278 6.113l9.73-9.73zM10 15a2 2 0 1 1-4 0h4zm-9.375.625a.53.53 0 0 0 .75.75l14.75-14.75a.53.53 0 0 0-.75-.75L.625 15.625z" />
                             </svg>
                           </ng-template>
                         </div>
@@ -132,9 +148,10 @@
                 </li>
               </ng-container>
             </ul>
-          </div>
-        </ng-template>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
+  <div class="p-2 bd-highlight"></div>
 </div>

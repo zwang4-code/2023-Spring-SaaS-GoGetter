@@ -21,14 +21,11 @@ h3 {
   background-color: #E6E6FA;
 }
 
-.goal-title {
-
-  font-family: Cambria;
-  font-size: 15px;
+.list-group-item {
+  padding: 0rem !important; /* this sets the padding to 1rem (or 16px if the base font-size is 16px) on all sides */
 }
-
-.card-body{
-  border: none;
+.card-body {
+  padding: 0rem !important; /* this sets the margin to 1rem (or 16px if the base font-size is 16px) on all sides */
 }
 
 .accordion-container {

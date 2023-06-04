@@ -3,55 +3,51 @@
 <app-nav></app-nav>
 <br>
 
-<h2 style="color: #8c4ca6">
+<h2 class="text-center" style="color: #8c4ca6 py-2">
   Look at the badges that you accomplished!
 </h2>
 
-<p class = "alerts">
-	<ngb-alert [dismissible]="false">
-		<strong>Hey!</strong> Want to earn more badges? Go create more goals!
-	</ngb-alert>
-</p>
-
-<hr>
-<br>
+<div class="text-white py-3" style="background-color: rgb(177, 211, 115);">
+  <div class="container text-center">
+    <strong>Hey!</strong> Want to earn more badges? Go create more goals!
+  </div>
+</div>
 
 <div class="container marketing">
-
   <!-- Three columns of text below the carousel -->
   <div class="row">
     <div class="col-lg-4">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/welcome.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/welcome.png" alt="Placeholder">
       <h2 class="fw-normal">Welcome Badge</h2>
       <p>Congratulations!! You just earned your first badge by creating an account with GoGetter. Let's be better.</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 1">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/firstGoalCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/firstGoalCreated.png" alt="Placeholder">
       <h2 class="fw-normal">First Goal Badge</h2>
       <p>You just created your first goal. We hope you accomplish it like a charm. We are in this together.</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 2">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/secondGoalCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/secondGoalCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Second Goal Badge</h2>
       <p>You just created your second goal! Keep up the good work!</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 3">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/thirdGoalCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/thirdGoalCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Third Goal Badge</h2>
       <p>You just created your third goal! You got this!</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 4">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/fourthGoalCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/fourthGoalCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Fourth Goal Badge</h2>
       <p>You just created your fourth goal! Hooray!</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 5">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/firstFiveGoalsCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/fifthGoalCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Five Goal Badge</h2>
       <p>Woah!!! Congratulations on creating 5 goals. You really getting better. And we are loving it.</p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4" *ngIf="user.goalCreated >= 10">
-      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/tenGoalsCreated.png" alt="Placeholder">
+      <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../assets/image/badge/tenGoalsCreated.png" alt="Placeholder">
       <h2 class="fw-normal">Ten Goal Badge</h2>
       <p>Yayyyy!! Your 10th goal. You have a long way to go and we are there to help you with GoGetter.</p>
     </div><!-- /.col-lg-4 -->

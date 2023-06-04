@@ -23,6 +23,9 @@ export class WelcomeComponent {
     .subscribe({
       next: (response) => {
         this.quote = response.content
+        if (this.quote.length > 150) {
+          this.getQuote();  // Call the function again if the quote length is over 150 characters
+        }
         this.author = response.author
       },
       error: (error) => {

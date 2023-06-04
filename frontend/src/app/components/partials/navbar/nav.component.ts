@@ -21,6 +21,7 @@ export class NavComponent implements OnInit {
     this.userObservable = this.goalService.getUserById();
     this.userObservable.subscribe((result) => {
       this.user = result;
+      console.log("user>>>>>>>>>>>>>", this.user)
     })
   }
 
