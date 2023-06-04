@@ -77,7 +77,7 @@ usersCollection.insert({
     userId: "2",
     oauthId: "113188584359730329106",
     name: "Zi Wang",
-    email: "zi@gmail.com",
+    email: "goGetterAppTest@gmail.com",
     goalCreated: 2,
     picture: "https://lh3.googleusercontent.com/a/AAcHTteVGq4lqXEocZoyUou14Fpn-jikL_xBhHdfXpIr=s100"
 })
