@@ -253,6 +253,15 @@ usersCollection.insert({
     picture: "https://lh3.googleusercontent.com/a/AAcHTtc9jvF4dkRHXSauNcZdwyji1p1S1Fd0kAEWnfkV=s100"
 })
 
+usersCollection.insert({
+    userId: "3",
+    oauthId: "110762836480794334382",
+    name: "Sharon Leo",
+    email: "sharonleo318@gmail.com",
+    goalCreated: 10,
+    picture: "https://lh3.googleusercontent.com/a/AAcHTtfoKN7rapkepQNbVpy42cypl1VHQIFZOrzlOW-snQ=s100"
+})
+
 //REMINDERS COLLECTION (work in progress)
 // Note: Reminder feature has not bee fully implemented yet
 db.createCollection('reminders')
