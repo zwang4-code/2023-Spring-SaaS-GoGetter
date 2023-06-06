@@ -86,7 +86,7 @@ class App {
             }
         }));
         //--------------------------------------------GOAL CRUD--------------------------------------
-        // NOTE: use https://gogetterapp.azurewebsites.net for testing on Azure
+        // NOTE: use https://gogetterbebetter.azurewebsites.net for testing on Azure
         // Create a goal
         // POST: http://localhost:8080/app/goal
         router.post('/app/goal', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -181,6 +181,7 @@ class App {
             this.Users.deleteUser(res, { userId: id });
         });
         //--------------------------------------------REMINDER CRUD--------------------------------------
+        // Note: Reminder feature has not been fully implemented yet.
         // Create a reminder
         // POST: http://localhost:8080/app/reminder
         router.post('/app/reminder', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {

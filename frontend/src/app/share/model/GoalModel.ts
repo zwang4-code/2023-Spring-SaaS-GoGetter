@@ -14,16 +14,4 @@ export class GoalModel{
   endDate?: Date;
   progress?: ProgressEnum;
   reminder?: boolean;
-
-//   constructor (
-//     public goalId: string,
-//     public userId: string,
-//     public title: string,
-//     public category: CategoryEnum,
-//     public description?: string,
-//     public startDate?: Date,
-//     public endDate?: Date,
-//     public progress?: ProgressEnum,
-//     public reminder?: boolean,
-//   ) {  }
 }

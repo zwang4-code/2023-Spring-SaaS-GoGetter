@@ -91,7 +91,7 @@ class App {
 
     //--------------------------------------------GOAL CRUD--------------------------------------
 
-    // NOTE: use https://gogetterapp.azurewebsites.net for testing on Azure
+    // NOTE: use https://gogetterbebetter.azurewebsites.net for testing on Azure
 
     // Create a goal
     // POST: http://localhost:8080/app/goal
@@ -200,6 +200,7 @@ class App {
     });
 
     //--------------------------------------------REMINDER CRUD--------------------------------------
+    // Note: Reminder feature has not been fully implemented yet.
 
     // Create a reminder
     // POST: http://localhost:8080/app/reminder
