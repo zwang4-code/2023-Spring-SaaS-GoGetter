@@ -6,7 +6,7 @@
   "dependencies": {
     "@types/es6-promise": "^3.3.0",
     "@types/express": "^4.11.1",
-    "@types/node": "^17.0.25",
+    "@types/node": "^20.2.5",
     "assert": "^1.4.1",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
