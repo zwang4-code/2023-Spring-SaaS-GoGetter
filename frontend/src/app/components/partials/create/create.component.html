@@ -26,6 +26,7 @@
         <div class="col-5">
         <input type="text" class="form-control" id="title" required [(ngModel)]="newGoal.title" name="title" #title="ngModel" placeholder="Enter title">
         <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+            Enter title of your goal!
         </div>  
         </div>
     </div>
