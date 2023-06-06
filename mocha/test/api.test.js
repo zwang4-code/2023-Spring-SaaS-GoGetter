@@ -8,17 +8,18 @@ var should = chai.should();
 
 var http = require('http');
 chai.use(chaiHttp);
+var azure_url = "https://gogetterbebetter.azurewebsites.net"
 
 /**
  * This test will get the list of the objects 
  */
-//Testing API: http://localhost:8080/test/app/goal
+//Testing API: {azure_url}/test/app/goal
 describe('Test "Get Multiple Goals"', function () {
 	var requestResult;
 	var response;
 
 	before(function (done) {
-		chai.request("http://localhost:8080")
+		chai.request(azure_url)
 			.get("/test/app/goal")
 			.end(function (err, res) {
 				requestResult = res.body;
@@ -93,13 +94,13 @@ describe('Test "Get Multiple Goals"', function () {
  * This is testing for getting a single object.
  * Testing for the goalID = 3
  */
-//Testing API: http://localhost:8080/test/app/goal/3
+//Testing API: {azure_url}/test/app/goal/3
 describe('Test "Get Single Goal"', function () {
 	var requestResult;
 	var response;
 
 	before(function (done) {
-		chai.request("http://localhost:8080")
+		chai.request(azure_url)
 			.get("/test/app/goal/3")
 			.end(function (err, res) {
 				requestResult = res.body;
@@ -164,7 +165,7 @@ describe('Test "Get Single Goal"', function () {
 /**
  * This is testing for create a single object.
  */
-//Testing API: http://localhost:8080/test/app/goal
+//Testing API: {azure_url}/test/app/goal
 describe('Test "Create a New Goal"', function () {
 	var requestResult;
 	var response;
@@ -189,7 +190,7 @@ describe('Test "Create a New Goal"', function () {
 	var newGoalID = null;
 
 	before(function (done) {
-		chai.request("http://localhost:8080")
+		chai.request(azure_url)
 			.post("/test/app/goal")
 			.send(newGoalObj)
 			.end(function (err, res) {
@@ -232,7 +233,7 @@ describe('Test "Create a New Goal"', function () {
 
 	// Perform delete request to delete the newly created goal inside the callback function of the POST request (to return database to initial state)
 	after(function (done) {
-		chai.request("http://localhost:8080")
+		chai.request(azure_url)
 			.delete("/test/app/goal/" + newGoalID)
 			.end(function (err, res) {
 				if (err) {

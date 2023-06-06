@@ -4,6 +4,7 @@ import { CategoryEnum } from '../enum/CategoryEnum';
 import { ProgressEnum } from '../enum/ProgressEnum';
 import { STATUS_CODES } from "http";
 import Mongoose = require("mongoose");
+import { title } from 'process';
 
 let mongooseConnection = DataAccess.mongooseConnection;
 let mongooseObj = DataAccess.mongooseInstance;
@@ -25,8 +26,18 @@ class GoalModel {
                 userId: {type: String, required: true},
                 title: {type: String, required: true},
                 description: {type: String},
-                startDate: {type: Date},
-                endDate: {type: Date},
+                startDate: {
+                  type: Date,
+                  default: Date.now
+                },
+                endDate: {
+                  type: Date,
+                  default: function() {
+                    var endDate = new Date();
+                    endDate.setMonth(endDate.getMonth() + 1);
+                    return endDate;
+                }
+                },
                 category: {
                     type: String,
                     enum: [CategoryEnum.School, CategoryEnum.Health, CategoryEnum.Career, CategoryEnum.Relationship,CategoryEnum.Reading, CategoryEnum.Travel],
