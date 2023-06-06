@@ -14,8 +14,8 @@ export class GoalService {
   // appGoalURL = 'http://localhost:8080/app/goal'; 
   // userURL = 'http://localhost:8080/app/user';
   
-  appGoalURL = 'https://gogetterbebetter.azurewebsites.net/app/goal'; 
-  userURL = 'https://gogetterbebetter.azurewebsites.net/app/user';
+  appGoalURL = 'http://gogetterbebetter.azurewebsites.net/app/goal'; 
+  userURL = 'http://gogetterbebetter.azurewebsites.net/app/user';
 
   constructor(private http: HttpClient) {
   }
