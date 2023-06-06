@@ -11,27 +11,45 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
+        with:
+          submodules: false
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.5.0
         with:
           node-version: '18.x'
 
       - name: npm install, build, and test
         run: |
+          echo "Building Frontend"
+          cd frontend
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm install -g @angular/cli
+          ng build
+          cd ..
+
+          echo "Building Backend"
+          cd backend
+          npm install
+          npm run build
+          
+      - name: Zip artifact for deployment
+        run:  |
+          cd backend
+          pwd
+          ls
+          zip -r release.zip .
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: .
+          path: ./backend/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,16 +59,24 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: node-app
+        - name: Check Azure CLI version
+          run: az --version
 
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'goGetterApp'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0C0359A239AF4019BC9B5B6448F30FAC }}
-          package: .
+        - name: Log in with Azure
+          uses: azure/login@v1
+          with:
+              creds: '${{ secrets.AZURE_CREDENTIALS }}'
+
+        - name: Download artifact from build job
+          uses: actions/download-artifact@v2
+          with:
+            name: node-app
+            
+        - name: 'Deploy to Azure Web App'
+          id: deploy-to-webapp
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: 'gogetterapp'
+            slot-name: 'Production'
+            publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2C89E24A84EF471D9669C85CCA28D457 }}
+            package: release.zip

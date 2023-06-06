@@ -11,8 +11,11 @@ import { UserModel } from '../share/model/UserModel';
 })
 
 export class GoalService {
-  appGoalURL = 'http://localhost:8080/app/goal';  // URL to web api
-  userURL = 'http://localhost:8080/app/user';
+  // appGoalURL = 'http://localhost:8080/app/goal'; 
+  // userURL = 'http://localhost:8080/app/user';
+  
+  appGoalURL = 'https://gogetterapp.azurewebsites.net/app/goal'; 
+  userURL = 'https://gogetterapp.azurewebsites.net/app/user';
 
   constructor(private http: HttpClient) {
   }
