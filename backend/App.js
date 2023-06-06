@@ -91,20 +91,33 @@ class App {
         // POST: http://localhost:8080/app/goal
         router.post('/app/goal', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             var newGoalInfo = req.body;
-            newGoalInfo.userId = session.userId;
-            if (newGoalInfo.description == null) {
-                newGoalInfo.description = newGoalInfo.title;
+            try {
+                const userId = yield this.Users.getUserIdByOauthId(req.user.id);
+                if (userId) {
+                    // Store the userId in the session
+                    session.userId = userId;
+                    newGoalInfo.userId = session.userId;
+                    if (newGoalInfo.description == null) {
+                        newGoalInfo.description = newGoalInfo.title;
+                    }
+                    newGoalInfo.reminder = false;
+                    newGoalInfo.goalId = crypto.randomBytes(16).toString("hex"); // generate random ID to assign to new user 
+                    console.log('Create new goal with goalId:' + newGoalInfo.goalId);
+                    this.Goals.createNewGoal(res, newGoalInfo);
+                }
+                else {
+                    console.log("User not found for querying all goals");
+                }
             }
-            newGoalInfo.reminder = false;
-            newGoalInfo.goalId = crypto.randomBytes(16).toString("hex"); // generate random ID to assign to new user 
-            console.log('Create new goal with goalId:' + newGoalInfo.goalId);
-            this.Goals.createNewGoal(res, newGoalInfo);
+            catch (error) {
+                console.error("Error retrieving userId for getting all goals", error);
+            }
         }));
         // Retrieve all goals
         // GET: http://localhost:8080/app/goal
         // GET: http://localhost:8080/app/goal?category=Health
         // GET: http://localhost:8080/app/goal?progress=In Progress
-        router.get('/app/goal', this.validateAuth, (req, res) => {
+        router.get('/app/goal', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             if (req.query.hasOwnProperty('category')) {
                 const _category = req.query.category;
                 console.log('Category: ' + _category);
@@ -117,9 +130,22 @@ class App {
             }
             else {
                 console.log('Query all goals');
-                this.Goals.retrieveAllGoals(res, { userId: session.userId });
+                try {
+                    const userId = yield this.Users.getUserIdByOauthId(req.user.id);
+                    if (userId) {
+                        // Store the userId in the session
+                        session.userId = userId;
+                        this.Goals.retrieveAllGoals(res, { userId: session.userId });
+                    }
+                    else {
+                        console.log("User not found for querying all goals");
+                    }
+                }
+                catch (error) {
+                    console.error("Error retrieving userId for getting all goals", error);
+                }
             }
-        });
+        }));
         // Retrieve one goal by goalId
         // GET: http://localhost:8080/app/goal/1
         router.get('/app/goal/:goalId', this.validateAuth, (req, res) => {
