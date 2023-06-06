@@ -29,7 +29,6 @@ jobs:
           echo "Building Frontend"
           cd frontend
           npm install
-          npm install -g @angular/cli
           ng build
           cd ..
 

@@ -25,7 +25,7 @@
   <div class="p-2 bd-highlight"></div>
 
   <!--Make for each Category collapsable and expandable-->
-  <div ngbAccordion style="width:80%" class="accordion-container px-5 flex-grow-1 bd-highlight" style="font-family: 'Playfair Display', serif;">
+  <div ngbAccordion style="width:80%" class="accordion-container px-5 flex-grow-1 bd-highlight">
     <div ngbAccordionItem *ngFor="let category of categories" [collapsed]="category !== firstCategoryWithGoal"
       style="border: 0.2px solid #a598bb">
       <div ngbAccordionHeader *ngIf="hasGoalsInCategories([category])">
@@ -64,7 +64,7 @@
                           </svg>
                         </span>
                       </button>
-                      <span style="font-family: 'Playfair Display', serif; font-size:15.5px">
+                      <span style="font-size:15.5px">
                         <!--goal title-->
                         {{ goal.title }}
                       </span>
@@ -118,7 +118,7 @@
                   <!--Collapsable goal details-->
                   <div #collapse="ngbCollapse" [(ngbCollapse)]="goalIsCollapsed[i]">
                     <div style="padding: 0px 0px 12px 45px;">
-                      <div style="font-size:13px; font-family: 'Playfair Display', serif;">
+                      <div style="font-size:13px">
                         <div><b>Description:</b> {{goal.description}}</div>
                         <div><b>Start date:</b> {{goal.startDate | date}}</div>
                         <div><b>End date:</b> {{goal.endDate | date}}</div>
