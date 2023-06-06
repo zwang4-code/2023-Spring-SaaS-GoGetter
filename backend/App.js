@@ -86,11 +86,15 @@ class App {
             }
         }));
         //--------------------------------------------GOAL CRUD--------------------------------------
+        // NOTE: use https://gogetterapp.azurewebsites.net for testing on Azure
         // Create a goal
         // POST: http://localhost:8080/app/goal
         router.post('/app/goal', this.validateAuth, (req, res) => __awaiter(this, void 0, void 0, function* () {
             var newGoalInfo = req.body;
             newGoalInfo.userId = session.userId;
+            if (newGoalInfo.description == null) {
+                newGoalInfo.description = newGoalInfo.title;
+            }
             newGoalInfo.reminder = false;
             newGoalInfo.goalId = crypto.randomBytes(16).toString("hex"); // generate random ID to assign to new user 
             console.log('Create new goal with goalId:' + newGoalInfo.goalId);

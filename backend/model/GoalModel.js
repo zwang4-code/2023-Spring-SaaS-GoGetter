@@ -18,8 +18,18 @@ class GoalModel {
             userId: { type: String, required: true },
             title: { type: String, required: true },
             description: { type: String },
-            startDate: { type: Date },
-            endDate: { type: Date },
+            startDate: {
+                type: Date,
+                default: Date.now
+            },
+            endDate: {
+                type: Date,
+                default: function () {
+                    var endDate = new Date();
+                    endDate.setMonth(endDate.getMonth() + 1);
+                    return endDate;
+                }
+            },
             category: {
                 type: String,
                 enum: [CategoryEnum_1.CategoryEnum.School, CategoryEnum_1.CategoryEnum.Health, CategoryEnum_1.CategoryEnum.Career, CategoryEnum_1.CategoryEnum.Relationship, CategoryEnum_1.CategoryEnum.Reading, CategoryEnum_1.CategoryEnum.Travel],
