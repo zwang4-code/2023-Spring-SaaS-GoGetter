@@ -59,6 +59,62 @@ goalsCollection.insert(
 }
 )
 
+goalsCollection.insert(
+    {
+        goalId: "5",
+        title: "Leetcode",
+        description: "Do 2 questions daily",
+        userId: "1",
+        startDate: new Date("2023-04-15"),
+        endDate: new Date("2023-05-15"),
+        category: "Career",
+        progress: "Not Started",
+        reminder: false,
+    }
+    )
+
+    goalsCollection.insert(
+        {
+            goalId: "6",
+            title: "Family Calls",
+            description: "Attend family calls on zoom every saturday and sunday",
+            userId: "1",
+            startDate: new Date("2023-07-15"),
+            endDate: new Date("2023-08-15"),
+            category: "Relationship",
+            progress: "Not Started",
+            reminder: false,
+        }
+        )
+
+    goalsCollection.insert(
+    {
+        goalId: "7",
+        title: "Italy Trip",
+        description: "Walk 2 miles daily to form habit to walk when you go italy. Save some money too.",
+        userId: "1",
+        startDate: new Date("2023-06-15"),
+        endDate: new Date("2023-09-15"),
+        category: "Travel",
+        progress: "Not Started",
+        reminder: false,
+    }
+    )
+
+    goalsCollection.insert(
+        {
+            goalId: "8",
+            title: "Contribute in ACM-W Club",
+            description: "Come up with ideas and conduct workshops",
+            userId: "1",
+            startDate: new Date("2023-09-19"),
+            endDate: new Date("2023-12-10"),
+            category: "School",
+            progress: "Not Started",
+            reminder: false,
+        }
+        )
+
 //USERS COLLECTION
 db.createCollection('users')
 usersCollection = db.getCollection("users")
@@ -68,7 +124,7 @@ usersCollection.insert({
     oauthId: "117027176084175812322",
     name: "Preedhi Garg",
     email: "gargpreedhi@gmail.com",
-    goalCreated: 2,
+    goalCreated: 6,
     picture: "https://lh3.googleusercontent.com/a/AAcHTteZbkVqctfrbfNzZ_Wr5LiU2_CLb10oGYv8i43s=s100"
 }
 )
