@@ -98,6 +98,9 @@ class App {
     router.post('/app/goal',this.validateAuth, async (req: any, res: any) => {
       var newGoalInfo = req.body;
       newGoalInfo.userId = session.userId;
+      if (newGoalInfo.description == null) {
+        newGoalInfo.description = newGoalInfo.title;
+      }
       newGoalInfo.reminder = false;
       newGoalInfo.goalId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
       console.log('Create new goal with goalId:' + newGoalInfo.goalId);
