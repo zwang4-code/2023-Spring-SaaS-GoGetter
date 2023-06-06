@@ -76,10 +76,10 @@ usersCollection.insert({
 usersCollection.insert({
     userId: "2",
     oauthId: "113188584359730329106",
-    name: "Zi Wang",
+    name: "GoGetter Test",
     email: "goGetterAppTest@gmail.com",
     goalCreated: 2,
-    picture: "https://lh3.googleusercontent.com/a/AAcHTteVGq4lqXEocZoyUou14Fpn-jikL_xBhHdfXpIr=s100"
+    picture: "https://lh3.googleusercontent.com/a/AAcHTtc9jvF4dkRHXSauNcZdwyji1p1S1Fd0kAEWnfkV=s100"
 })
 
 //REMINDERS COLLECTION
