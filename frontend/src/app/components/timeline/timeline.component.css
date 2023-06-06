@@ -1,5 +1,9 @@
-div {
+/* div {
   font-family: 'Playfair Display', serif !important;
+} */
+
+.beauty {
+  font-family: 'Playfair Display', serif;
 }
 
 h3 {
@@ -17,3 +21,4 @@ h3 {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #e6e6fa;
 }
+
