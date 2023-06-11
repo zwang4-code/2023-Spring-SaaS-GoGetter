@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataAccess = void 0;
 const Mongoose = require("mongoose");
-const db_connection_string = process.env.MONGODB_CONNECTION_STRING;
 class DataAccess {
     constructor() {
         DataAccess.connect();
@@ -14,12 +13,12 @@ class DataAccess {
         this.mongooseConnection.on("open", () => {
             console.log("Connected to mongodb.");
         });
-        this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING);
+        this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
         return this.mongooseInstance;
     }
 }
 exports.DataAccess = DataAccess;
 //static DB_CONNECTION_STRING:string = 'mongodb://dbAdmin:test@localhost:27017/gogetter?authSource=admin';
-DataAccess.DB_CONNECTION_STRING = db_connection_string;
+DataAccess.DB_CONNECTION_STRING = process.env.MONGODB_CONNECTION_STRING;
 DataAccess.connect();
 console.log(DataAccess.mongooseConnection.readyState);
