@@ -8,7 +8,7 @@ var should = chai.should();
 
 var http = require('http');
 chai.use(chaiHttp);
-var azure_url = "https://gogetterbebetter.azurewebsites.net"
+var azure_url = "https://gogetterapp.azurewebsites.net"
 
 /**
  * This test will get the list of the objects 
