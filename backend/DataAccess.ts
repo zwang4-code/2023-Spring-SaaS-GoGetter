@@ -1,10 +1,13 @@
 import Mongoose = require("mongoose");
+require('dotenv').config()
+
+const db_connection_string = process.env.MONGODB_CONNECTION_STRING
 
 class DataAccess {
     static mongooseInstance: any;
     static mongooseConnection: Mongoose.Connection;
     //static DB_CONNECTION_STRING:string = 'mongodb://dbAdmin:test@localhost:27017/gogetter?authSource=admin';
-    static DB_CONNECTION_STRING:string = 'mongodb+srv://Cluster0:Cluster0GoGetter@cluster0.hfpeten.mongodb.net/gogetter';
+    static DB_CONNECTION_STRING:string = db_connection_string;
     
     constructor () {
         DataAccess.connect();

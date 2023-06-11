@@ -1,6 +1,9 @@
+require('dotenv').config()
+
+const google_oauth_id = process.env.GOOGLE_OAUTH_ID
+const google_oauth_secret = process.env.GOOGLE_OAUTH_SECRET
 class GoogleOauth {
-    static id: string = '611398325708-p8j0gm376lm9o4d1dpv122bst7967e0k.apps.googleusercontent.com';
-    static secret:string = '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';
-    
-    }
-    export default GoogleOauth;
+    static id: string = google_oauth_id;
+    static secret: string = google_oauth_secret;
+}
+export default GoogleOauth;
