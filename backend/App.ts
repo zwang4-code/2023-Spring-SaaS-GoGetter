@@ -37,7 +37,7 @@ class App {
   private middleware(): void {
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-    this.expressApp.use(session({ secret: 'gogettersecret'}));
+    this.expressApp.use(session({ secret: 'gogettersecret', resave: false, saveUninitialized: false}));
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());

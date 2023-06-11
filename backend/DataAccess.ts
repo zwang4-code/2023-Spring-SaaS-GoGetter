@@ -1,8 +1,6 @@
 import Mongoose = require("mongoose");
-// require('dotenv').config()
 
 const db_connection_string = process.env.MONGODB_CONNECTION_STRING
-console.log("?????????????", process.env.MONGODB_CONNECTION_STRING);
 
 class DataAccess {
     static mongooseInstance: any;
