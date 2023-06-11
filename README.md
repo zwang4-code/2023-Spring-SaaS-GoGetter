@@ -1,5 +1,13 @@
 ## GoGetter - A goal setting and tracking application
 
+Deployed on Azure: gogetterapp.azurewebsites.net
+
+Folder content:
+* backend - contains all code related to mongoose and API to fetch data from mongodb
+* frontend - contains code for angular module, component and services
+* mocha - contains mocha test cases to test the API
+* bootstrap - contains html code for dummy homepage using bootstrap grid
+
 #### If you want to run Angular App and NodeJS on different servers: 
 (Angular App runs on Port 4200 by default while NodeJS runs on Port 8080)
 ##### Go to frontend folder
@@ -41,8 +49,3 @@ Authors:
 * Sharon Leo
 * Bao Tran Do 
 * Zi Wang
-
-* backend - contains all code related to mongoose and API to fetch data from mongodb
-* bootstrap - contains html code for dummy homepage using bootstrap grid
-* frontend - contains code for angular module, component and services
-* mocha - contains test files to test the API
