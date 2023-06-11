@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataAccess = void 0;
 const Mongoose = require("mongoose");
+const db_connection_string = process.env.MONGODB_CONNECTION_STRING;
 class DataAccess {
     constructor() {
         DataAccess.connect();
@@ -19,6 +20,6 @@ class DataAccess {
 }
 exports.DataAccess = DataAccess;
 //static DB_CONNECTION_STRING:string = 'mongodb://dbAdmin:test@localhost:27017/gogetter?authSource=admin';
-DataAccess.DB_CONNECTION_STRING = 'mongodb+srv://Cluster0:Cluster0GoGetter@cluster0.hfpeten.mongodb.net/gogetter';
+DataAccess.DB_CONNECTION_STRING = db_connection_string;
 DataAccess.connect();
 console.log(DataAccess.mongooseConnection.readyState);

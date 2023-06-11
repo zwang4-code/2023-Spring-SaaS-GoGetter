@@ -1,7 +1,5 @@
-const google_oauth_id = process.env.GOOGLE_OAUTH_ID
-const google_oauth_secret = process.env.GOOGLE_OAUTH_SECRET
 class GoogleOauth {
-    static id: string = google_oauth_id;
-    static secret: string = google_oauth_secret;
+    static id: string = process.env.GOOGLE_OAUTH_ID;
+    static secret: string = process.env.GOOGLE_OAUTH_SECRET;
 }
 export default GoogleOauth;

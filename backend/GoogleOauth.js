@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const google_oauth_id = process.env.GOOGLE_OAUTH_ID;
+const google_oauth_secret = process.env.GOOGLE_OAUTH_SECRET;
 class GoogleOauth {
 }
-GoogleOauth.id = '611398325708-p8j0gm376lm9o4d1dpv122bst7967e0k.apps.googleusercontent.com';
-GoogleOauth.secret = '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';
+GoogleOauth.id = google_oauth_id;
+GoogleOauth.secret = google_oauth_secret;
 exports.default = GoogleOauth;

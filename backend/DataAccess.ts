@@ -1,12 +1,10 @@
 import Mongoose = require("mongoose");
 
-const db_connection_string = process.env.MONGODB_CONNECTION_STRING
-
 class DataAccess {
     static mongooseInstance: any;
     static mongooseConnection: Mongoose.Connection;
     //static DB_CONNECTION_STRING:string = 'mongodb://dbAdmin:test@localhost:27017/gogetter?authSource=admin';
-    static DB_CONNECTION_STRING:string = db_connection_string;
+    static DB_CONNECTION_STRING:string = process.env.MONGODB_CONNECTION_STRING;
     
     constructor () {
         DataAccess.connect();
