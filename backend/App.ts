@@ -63,9 +63,10 @@ class App {
   private routes(): void {
 
     let router = express.Router();
-    //GOOGLE OAUTH
 
-    router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+    //--------------------------------------------Google OAUTH GET--------------------------------------
+
+    router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
     router.get('/auth/google/callback',
       passport.authenticate('google', { failureRedirect: '/' }),
@@ -79,17 +80,18 @@ class App {
 
           var userId = await this.Users.getUserIdByOauthId(req.user.id);  // req.user.id is the google profile ID
 
+          // create new user if user (more specifically, google profile ID) does not exist in database
           if (!userId) {
-            // create new user
-            // check if user has picture 
+            // check if user has profile picture 
             let userPicture;
             if (req.user.photos && req.user.photos.length > 0) {
               userPicture = req.user.photos[0].value;
             }
-
+            
+            // create new user object based on google profile
             const newUser = {
               userId: crypto.randomBytes(16).toString("hex"),  // generate random ID to assign to new user 
-              oauthId: req.user.id,
+              oauthId: req.user.id,  // google profile ID
               name: req.user.displayName,
               email: req.user.emails[0].value,
               goalCreated: 0,
