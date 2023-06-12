@@ -72,11 +72,6 @@ class App {
       passport.authenticate('google', { failureRedirect: '/' }),
       async (req: any, res: any) => {
         try {
-          console.log(">>>???????????????????????????????????")
-          console.log(">>>1", req.user.displayName)
-          console.log(">>>2", req.user.photos[0].value)
-          console.log(">>>3", req.user.emails[0].value)
-
           var userId = await this.Users.getUserIdByOauthId(req.user.id);  // req.user.id is the google profile ID
 
           // create new user if user (more specifically, google profile ID) does not exist in database

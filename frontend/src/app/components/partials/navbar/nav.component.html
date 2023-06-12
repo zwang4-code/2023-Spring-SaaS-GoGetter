@@ -1,13 +1,13 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #efebe2;">
   <img src="assets/image/logo.png" height="75px" width="200px" routerLink="/category">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
+  
+  <div class="navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/category" style="color: purple">CATEGORY<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/category" style="color: purple">CATEGORY<span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/timeline" style="color:purple;" href="#">TIMELINE</a>
@@ -27,7 +27,7 @@
           <button ngbDropdownItem>ID: {{user.userId}}</button>
           <button ngbDropdownItem>{{user.name}}</button>
           <button ngbDropdownItem>{{user.email}}</button>
-          <button ngbDropdownItem (click)="signOut()" >Sign Out</button>
+          <button ngbDropdownItem (click)="signOut()">Sign Out</button>
         </div>
       </div>
     </span>
