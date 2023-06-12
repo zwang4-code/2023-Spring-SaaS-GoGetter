@@ -72,11 +72,10 @@ class App {
       passport.authenticate('google', { failureRedirect: '/' }),
       async (req: any, res: any) => {
         try {
-          console.log(">>>???????????????????????????????????", req.user)
+          console.log(">>>???????????????????????????????????")
           console.log(">>>1", req.user.displayName)
           console.log(">>>2", req.user.photos[0].value)
-          console.log(">>>2", req.user.email)
-          console.log(">>>???????????????????????????????????")
+          console.log(">>>3", req.user.emails[0].value)
 
           var userId = await this.Users.getUserIdByOauthId(req.user.id);  // req.user.id is the google profile ID
 
@@ -87,17 +86,22 @@ class App {
             if (req.user.photos && req.user.photos.length > 0) {
               userPicture = req.user.photos[0].value;
             }
-            
+
+            let userEmail;
+            if (req.user.emails && req.user.emails.length > 0) {
+              userEmail = req.user.emails[0].value;
+            }
+
             // create new user object based on google profile
             const newUser = {
               userId: crypto.randomBytes(16).toString("hex"),  // generate random ID to assign to new user 
               oauthId: req.user.id,  // google profile ID
               name: req.user.displayName,
-              email: req.user.emails[0].value,
+              email: userEmail,
               goalCreated: 0,
               picture: userPicture,
             }
-            this.Users.createNewUser(res, newUser);
+            await this.Users.createNewUser(newUser);
             userId = newUser.userId;
             console.log("New user created and authenticated");
           }
@@ -200,16 +204,6 @@ class App {
     });
 
     //--------------------------------------------USER CRUD--------------------------------------
-
-    // // Create a user
-    // // http://localhost:8080/app/user (user info as JSON in input payload)
-    // router.post('/app/user/',this.validateAuth, (req, res) => {
-    //   var newUserInfo = req.body;
-    //   var newUserEmail = newUserInfo.email   // email will be used to check for existing user
-    //   newUserInfo.userId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
-    //   console.log('Add new user to database');
-    //   this.Users.createNewUser(res, newUserInfo, { email: newUserEmail });
-    // });
 
     // Retrieve all users
     // http://localhost:8080/app/users
