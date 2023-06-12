@@ -71,20 +71,29 @@ class App {
       passport.authenticate('google', { failureRedirect: '/' }),
       async (req: any, res: any) => {
         try {
-          console.log(">>>???????????????????????????????????", req)
+          console.log(">>>???????????????????????????????????", req.user)
+          console.log(">>>1", req.user.displayName)
+          console.log(">>>2", req.user.req.user.photos[0].value)
+          console.log(">>>2", req.user.email)
           console.log(">>>???????????????????????????????????")
 
           var userId = await this.Users.getUserIdByOauthId(req.user.id);  // req.user.id is the google profile ID
 
-          if (!userId) {  
+          if (!userId) {
             // create new user
+            // check if user has picture 
+            let userPicture;
+            if (req.user.photos && req.user.photos.length > 0) {
+              userPicture = req.user.photos[0].value;
+            }
+
             const newUser = {
               userId: crypto.randomBytes(16).toString("hex"),  // generate random ID to assign to new user 
               oauthId: req.user.id,
-              name: req.user.name,
-              email: req.user.email,
+              name: req.user.displayName,
+              email: req.user.emails[0].value,
               goalCreated: 0,
-              picture: req.user.picture
+              picture: userPicture,
             }
             this.Users.createNewUser(res, newUser);
             userId = newUser.userId;
