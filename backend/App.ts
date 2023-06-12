@@ -37,7 +37,7 @@ class App {
   private middleware(): void {
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-    this.expressApp.use(session({ secret: 'gogettersecret', resave: false, saveUninitialized: false}));
+    this.expressApp.use(session({ secret: 'gogettersecret', resave: false, saveUninitialized: false }));
     this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
     this.expressApp.use(passport.session());
@@ -65,29 +65,41 @@ class App {
     let router = express.Router();
     //GOOGLE OAUTH
 
-    router.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }));
+    router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
-    router.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/' }), 
-    async (req: any, res: any) => {
-      try {
-        const userId = await this.Users.getUserIdByOauthId(req.user.id);
-        if (userId) {
+    router.get('/auth/google/callback',
+      passport.authenticate('google', { failureRedirect: '/' }),
+      async (req: any, res: any) => {
+        try {
+          console.log(">>>???????????????????????????????????", req)
+          console.log(">>>???????????????????????????????????")
+
+          var userId = await this.Users.getUserIdByOauthId(req.user.id);  // req.user.id is the google profile ID
+
+          if (!userId) {  
+            // create new user
+            const newUser = {
+              userId: crypto.randomBytes(16).toString("hex"),  // generate random ID to assign to new user 
+              oauthId: req.user.id,
+              name: req.user.name,
+              email: req.user.email,
+              goalCreated: 0,
+              picture: req.user.picture
+            }
+            this.Users.createNewUser(res, newUser);
+            userId = newUser.userId;
+            console.log("New user created and authenticated");
+          }
           // Store the userId in the session
           session.userId = userId;
           console.log("User id succesfully authenticated");
           console.log("Redirecting to Category Page");
           res.redirect('/#/category');
-        } else {
-          console.log("User not found");
-          res.redirect('/login');
+        } catch (error) {
+          console.error("Error:", error);
+          res.redirect('/');
         }
-      } catch (error) {
-        console.error("Error retrieving userId:", error);
-        res.redirect('/login');
-      }
-    });
-    
+      });
 
     //--------------------------------------------GOAL CRUD--------------------------------------
 
@@ -95,7 +107,7 @@ class App {
 
     // Create a goal
     // POST: http://localhost:8080/app/goal
-    router.post('/app/goal',this.validateAuth, async (req: any, res: any) => {
+    router.post('/app/goal', this.validateAuth, async (req: any, res: any) => {
       var newGoalInfo = req.body;
       try {
         const userId = await this.Users.getUserIdByOauthId(req.user.id);
@@ -117,7 +129,7 @@ class App {
         console.error("Error retrieving userId for getting all goals", error);
       }
     });
-    
+
 
     // Retrieve all goals
     // GET: http://localhost:8080/app/goal
@@ -153,7 +165,7 @@ class App {
 
     // Retrieve one goal by goalId
     // GET: http://localhost:8080/app/goal/1
-    router.get('/app/goal/:goalId',this.validateAuth, (req, res) => {
+    router.get('/app/goal/:goalId', this.validateAuth, (req, res) => {
       var id = req.params.goalId;
       console.log('GoalId: ' + id);
       this.Goals.retrieveGoalDetails(res, { goalId: id });
@@ -161,7 +173,7 @@ class App {
 
     // Update one goal for one user
     // PUT: http://localhost:8080/app/goal/1
-    router.put('/app/goal/:goalId',this.validateAuth, (req, res) => {
+    router.put('/app/goal/:goalId', this.validateAuth, (req, res) => {
       const id = req.params.goalId;
       const goalUpdate = req.body;
       const filter = { goalId: id };
@@ -170,7 +182,7 @@ class App {
 
     // Delete one goal for one user
     // DELETE: http://localhost:8080/app/goal/1
-    router.delete('/app/goal/:goalId',this.validateAuth, (req, res) => {
+    router.delete('/app/goal/:goalId', this.validateAuth, (req, res) => {
       var id = req.params.goalId;
       console.log('GoalId to be deleted: ' + id);
       this.Goals.deleteGoal(res, { goalId: id })
@@ -178,26 +190,26 @@ class App {
 
     //--------------------------------------------USER CRUD--------------------------------------
 
-    // Create a user
-    // http://localhost:8080/app/user (user info as JSON in input payload)
-    router.post('/app/user/',this.validateAuth, (req, res) => {
-      var newUserInfo = req.body;
-      var newUserEmail = newUserInfo.email   // email will be used to check for existing user
-      newUserInfo.userId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
-      console.log('Add new user to database');
-      this.Users.createNewUser(res, newUserInfo, { email: newUserEmail });
-    });
+    // // Create a user
+    // // http://localhost:8080/app/user (user info as JSON in input payload)
+    // router.post('/app/user/',this.validateAuth, (req, res) => {
+    //   var newUserInfo = req.body;
+    //   var newUserEmail = newUserInfo.email   // email will be used to check for existing user
+    //   newUserInfo.userId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
+    //   console.log('Add new user to database');
+    //   this.Users.createNewUser(res, newUserInfo, { email: newUserEmail });
+    // });
 
     // Retrieve all users
     // http://localhost:8080/app/users
-    router.get('/app/users',this.validateAuth, (req: any, res: any) => {
+    router.get('/app/users', this.validateAuth, (req: any, res: any) => {
       console.log('Query all users');
       this.Users.retrieveAllUsers(res);
     });
 
     // Retrieve one user by userId
     // http://localhost:8080/app/user
-    router.get('/app/user', this.validateAuth,(req: any, res: any) => {
+    router.get('/app/user', this.validateAuth, (req: any, res: any) => {
       var profile = req.user;
       console.log('Query user with ID ' + profile.id);
       this.Users.retrieveUserDetails(res, { oauthId: profile.id });
@@ -205,16 +217,16 @@ class App {
 
     // Update one user by userId
     // http://localhost:8000/app/user/2 (user info in JSON in input payload)
-    router.put('/app/user', this.validateAuth,(req: any, res: any) => {
+    router.put('/app/user', this.validateAuth, (req: any, res: any) => {
       const profile = req.user;
       const userUpdate = req.body;
       console.log('Update info for user with ID ' + profile.id);
-      this.Users.updateUserDetails(res, userUpdate, {oauthId: profile.id})
+      this.Users.updateUserDetails(res, userUpdate, { oauthId: profile.id })
     });
 
     // Delete one user
     // http://localhost:8000/app/user/2
-    router.delete('/app/user/:userId',this.validateAuth, (req, res) => {
+    router.delete('/app/user/:userId', this.validateAuth, (req, res) => {
       var id = req.params.userId;
       console.log('Delete user with ID ' + id);
       this.Users.deleteUser(res, { userId: id })
@@ -225,7 +237,7 @@ class App {
 
     // Create a reminder
     // POST: http://localhost:8080/app/reminder
-    router.post('/app/reminder', this.validateAuth,async (req: any, res: any) => {
+    router.post('/app/reminder', this.validateAuth, async (req: any, res: any) => {
       var newReminderInfo = req.body;
       newReminderInfo.reminderId = crypto.randomBytes(16).toString("hex");  // generate random ID to assign to new user 
       console.log('Reminder created' + newReminderInfo.reminderId);
@@ -234,14 +246,14 @@ class App {
 
     // Retrieve all reminder
     // GET: http://localhost:8080/app/reminder
-    router.get('/app/reminder',this.validateAuth, (req, res) => {
+    router.get('/app/reminder', this.validateAuth, (req, res) => {
       console.log('Query all reminder');
       this.Reminders.retrieveAllReminder(res);
     });
 
     // Retrieve one reminder by reminderId
     // GET: http://localhost:8080/app/reminderId/1
-    router.get('/app/reminder/:reminderId', this.validateAuth,(req, res) => {
+    router.get('/app/reminder/:reminderId', this.validateAuth, (req, res) => {
       var id = req.params.reminderId;
       console.log('ReminderId: ' + id);
       this.Reminders.retrieveReminderDetails(res, { reminderId: id });
@@ -249,7 +261,7 @@ class App {
 
     // Delete one reminder
     // DELETE: http://localhost:8080/app/reminder/1
-    router.delete('/app/reminder/:reminderId',this.validateAuth, (req, res) => {
+    router.delete('/app/reminder/:reminderId', this.validateAuth, (req, res) => {
       var id = req.params.reminderId;
       console.log('reminderId to be deleted: ' + id);
       this.Reminders.deleteReminder(res, { reminderId: id })

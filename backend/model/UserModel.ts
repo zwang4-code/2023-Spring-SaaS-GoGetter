@@ -39,38 +39,30 @@ class UserModel {
         return user ? user.userId : null;
       };
 
-    public createNewUser(response: any, newUserInfo: Object, emailFilter: Object): void {
-        this.checkUserExists(emailFilter, (exists) => {
-            if (exists) {
-                let err = 'Error: email exists already';
+    public createNewUser(response: any, newUserInfo: Object): void {
+        this.model.create([newUserInfo], (err: any) => {
+            if (err) {
                 console.log(err);
-                response.status(409).json({ error: err });
-            } else {
-                this.model.create([newUserInfo], (err: any) => {
-                    if (err) {
-                        console.log(err);
-                        response.status(500).json({ error: err.message });
-                    }
-                    else {
-                        console.log('New user added successfully')
-                        response.send('New user added successfully');
-                    }
-                });
+                response.status(500).json({ error: err.message });
+            }
+            else {
+                console.log('New user added successfully')
+                response.send('New user added successfully');
             }
         });
     }
 
-    public checkUserExists(filter: Object, callback: (exists: boolean) => void): void {
-        var query = this.model.findOne(filter);
-        query.exec((err: any, itemArray: any) => {
-            if (err) {
-                console.log('Error:', err);
-            }
-            else {
-                callback(itemArray !== null);
-            }
-        });
-    }
+    // public checkUserExists(filter: Object, callback: (exists: boolean) => void): void {
+    //     var query = this.model.findOne(filter);
+    //     query.exec((err: any, itemArray: any) => {
+    //         if (err) {
+    //             console.log('Error:', err);
+    //         }
+    //         else {
+    //             callback(itemArray !== null);
+    //         }
+    //     });
+    // }
 
     public retrieveAllUsers(response: any): any {
         var query = this.model.find({});

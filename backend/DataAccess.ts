@@ -12,8 +12,6 @@ class DataAccess {
     }
     
     static connect (): Mongoose.Connection {
-        console.log("?????????????/?????/", this.DB_CONNECTION_STRING)
-        
         if(this.mongooseInstance) return this.mongooseInstance;
         
         this.mongooseConnection  = Mongoose.connection;
