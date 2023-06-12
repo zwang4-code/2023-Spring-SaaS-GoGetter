@@ -8,9 +8,12 @@ class DataAccess {
     
     constructor () {
         DataAccess.connect();
+        
     }
     
     static connect (): Mongoose.Connection {
+        console.log("?????????????/?????/", this.DB_CONNECTION_STRING)
+        
         if(this.mongooseInstance) return this.mongooseInstance;
         
         this.mongooseConnection  = Mongoose.connection;
@@ -19,6 +22,7 @@ class DataAccess {
         });
         
         this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
+        
         return this.mongooseInstance;
     }
     
