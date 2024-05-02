@@ -1,5 +1,5 @@
 ## GoGetter - A goal setting and tracking application
-
+#### SaaS class project
 Deployed on Azure: gogetterapp.azurewebsites.net
 
 Folder content:
